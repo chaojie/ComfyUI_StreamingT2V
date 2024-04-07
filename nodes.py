@@ -1,0 +1,255 @@
+# General
+import os
+from os.path import join as opj
+import datetime
+from pathlib import Path
+import torch
+import tempfile
+import yaml
+from .model.video_ldm import VideoLDM
+from typing import List, Optional
+from .model.callbacks import SaveConfigCallback
+from PIL.Image import Image, fromarray
+
+from einops import rearrange, repeat
+
+import folder_paths
+comfy_path = os.path.dirname(folder_paths.__file__)
+result_fol = f'{comfy_path}/output'
+
+import sys
+sys.path.insert(0,f'{comfy_path}/custom_nodes/ComfyUI_StreamingT2V/thirdparty')
+sys.path.insert(0,f'{comfy_path}/custom_nodes/ComfyUI_StreamingT2V')
+
+from modelscope.pipelines import pipeline
+from modelscope.outputs import OutputKeys
+import imageio
+import pathlib
+import numpy as np
+
+# Utilities
+from .inference_utils import *
+from .model_init import *
+from .model_func import *
+
+class StreamingT2VLoaderModelscopeT2V:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "ckpt_name": (folder_paths.get_filename_list("checkpoints"), {"default": "streaming_t2v.ckpt"}),
+                "device":("STRING",{"default":"cuda"}),
+            },
+        }
+
+    RETURN_TYPES = ("StreamingT2VModel",)
+    FUNCTION = "run"
+    CATEGORY = "StreamingT2V"
+
+    def run(self,ckpt_name,device):
+        sdxl_model=None
+        base_model="ModelscopeT2V"
+        result_fol = folder_paths.get_output_directory()
+        ckpt_file_streaming_t2v = folder_paths.get_full_path("checkpoints", ckpt_name)
+        cfg_v2v = {'downscale': 1, 'upscale_size': (1280, 720), 'model_id': 'damo/Video-to-Video', 'pad': True}
+        stream_cli, stream_model = init_streamingt2v_model(Path(ckpt_file_streaming_t2v).absolute(), Path(result_fol).absolute())
+        if base_model == "ModelscopeT2V":
+            model = init_modelscope(device)
+        elif base_model == "AnimateDiff":
+            model = init_animatediff(device)
+        elif base_model == "SVD":
+            model = init_svd(device)
+            sdxl_model = init_sdxl(device)
+        
+        msxl_model = init_v2v_model(cfg_v2v)
+        return ((model,sdxl_model,msxl_model,base_model,stream_cli, stream_model),)
+
+class StreamingT2VLoaderAnimateDiff:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "ckpt_name": (folder_paths.get_filename_list("checkpoints"), {"default": "streaming_t2v.ckpt"}),
+                "device":("STRING",{"default":"cuda"}),
+            },
+        }
+
+    RETURN_TYPES = ("StreamingT2VModel",)
+    FUNCTION = "run"
+    CATEGORY = "StreamingT2V"
+
+    def run(self,ckpt_name,device):
+        sdxl_model=None
+        base_model="AnimateDiff"
+        result_fol = folder_paths.get_output_directory()
+        ckpt_file_streaming_t2v = folder_paths.get_full_path("checkpoints", ckpt_name)
+        cfg_v2v = {'downscale': 1, 'upscale_size': (1280, 720), 'model_id': 'damo/Video-to-Video', 'pad': True}
+        stream_cli, stream_model = init_streamingt2v_model(Path(ckpt_file_streaming_t2v).absolute(), Path(result_fol).absolute())
+        if base_model == "ModelscopeT2V":
+            model = init_modelscope(device)
+        elif base_model == "AnimateDiff":
+            model = init_animatediff(device)
+        elif base_model == "SVD":
+            model = init_svd(device)
+            sdxl_model = init_sdxl(device)
+        
+        msxl_model = init_v2v_model(cfg_v2v)
+        return ((model,sdxl_model,msxl_model,base_model,stream_cli, stream_model),)
+
+class StreamingT2VLoaderSVD:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "ckpt_name": (folder_paths.get_filename_list("checkpoints"), {"default": "streaming_t2v.ckpt"}),
+                "device":("STRING",{"default":"cuda"}),
+            },
+        }
+
+    RETURN_TYPES = ("StreamingT2VModelSVD",)
+    FUNCTION = "run"
+    CATEGORY = "StreamingT2V"
+
+    def run(self,ckpt_name,device):
+        sdxl_model=None
+        base_model="SVD"
+        result_fol = folder_paths.get_output_directory()
+        ckpt_file_streaming_t2v = folder_paths.get_full_path("checkpoints", ckpt_name)
+        cfg_v2v = {'downscale': 1, 'upscale_size': (1280, 720), 'model_id': 'damo/Video-to-Video', 'pad': True}
+        stream_cli, stream_model = init_streamingt2v_model(Path(ckpt_file_streaming_t2v).absolute(), Path(result_fol).absolute())
+        if base_model == "ModelscopeT2V":
+            model = init_modelscope(device)
+        elif base_model == "AnimateDiff":
+            model = init_animatediff(device)
+        elif base_model == "SVD":
+            model = init_svd(device)
+            sdxl_model = init_sdxl(device)
+        
+        msxl_model = init_v2v_model(cfg_v2v)
+        return ((model,sdxl_model,msxl_model,base_model,stream_cli, stream_model),)
+
+
+class StreamingT2VRunT2V:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "StreamingT2VModel": ("StreamingT2VModel",),
+                "prompt":("STRING",{"default":"A cat running on the street"}),
+                "negative_prompt":("STRING",{"default":""}),
+                "num_frames": ("INT", {"default": 24}),
+                "num_steps": ("INT", {"default": 50}),
+                "image_guidance": ("FLOAT", {"default": 9.0}),
+                "seed": ("INT", {"default": 33}),
+                "chunk": ("INT", {"default": 56}),
+                "overlap": ("INT", {"default": 32}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("video_path",)
+    FUNCTION = "run"
+    OUTPUT_NODE = True
+    CATEGORY = "StreamingT2V"
+
+    def run(self,StreamingT2VModel,prompt,negative_prompt,num_frames,num_steps,image_guidance,seed,chunk,overlap):
+        result_fol = folder_paths.get_output_directory()
+        model,sdxl_model,msxl_model,base_model,stream_cli, stream_model=StreamingT2VModel
+        
+        inference_generator = torch.Generator(device="cuda")
+
+        now = datetime.datetime.now()
+        name = prompt[:100].replace(" ", "_") + "_" + str(now.time()).replace(":", "_").replace(".", "_")
+
+        inference_generator = torch.Generator(device="cuda")
+        inference_generator.manual_seed(seed)
+        
+        if base_model == "ModelscopeT2V":
+            short_video = ms_short_gen(prompt, model, inference_generator)
+        elif base_model == "AnimateDiff":
+            short_video = ad_short_gen(prompt, model, inference_generator)
+        elif base_model == "SVD":
+            short_video = svd_short_gen(image, prompt, model, sdxl_model, inference_generator)
+
+        n_autoreg_gen = (num_frames-8)//8
+        stream_long_gen(prompt, short_video, n_autoreg_gen, seed, num_steps, image_guidance, name, stream_cli, stream_model)
+
+        cfg_v2v = {'downscale': 1, 'upscale_size': (1280, 720), 'model_id': 'damo/Video-to-Video', 'pad': True}
+        if num_frames > 80:
+            video2video_randomized(prompt, opj(result_fol, name+".mp4"), result_fol, cfg_v2v, msxl_model, chunk_size=chunk, overlap_size=overlap)
+        else:
+            video2video(prompt, opj(result_fol, name+".mp4"), result_fol, cfg_v2v, msxl_model)
+        return f'{result_fol}/{name}.mp4'
+
+
+class StreamingT2VRunI2V:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "StreamingT2VModelSVD": ("StreamingT2VModelSVD",),
+                "image": ("IMAGE",),
+                "prompt":("STRING",{"default":"A cat running on the street"}),
+                "negative_prompt":("STRING",{"default":""}),
+                "num_frames": ("INT", {"default": 24}),
+                "num_steps": ("INT", {"default": 50}),
+                "image_guidance": ("FLOAT", {"default": 9.0}),
+                "seed": ("INT", {"default": 33}),
+                "chunk": ("INT", {"default": 56}),
+                "overlap": ("INT", {"default": 32}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("video_path",)
+    FUNCTION = "run"
+    OUTPUT_NODE = True
+    CATEGORY = "StreamingT2V"
+
+    def run(self,StreamingT2VModelSVD,image,prompt,negative_prompt,num_frames,num_steps,image_guidance,seed,chunk,overlap):
+        image = 255.0 * image[0].cpu().numpy()
+        image = Image.fromarray(np.clip(image, 0, 255).astype(np.uint8))
+        input_fol = folder_paths.get_input_directory()
+        image=f'{input_fol}/i2v.png'
+
+        result_fol = folder_paths.get_output_directory()
+        model,sdxl_model,msxl_model,base_model,stream_cli, stream_model=StreamingT2VModelSVD
+        
+        inference_generator = torch.Generator(device="cuda")
+
+        now = datetime.datetime.now()
+        name = prompt[:100].replace(" ", "_") + "_" + str(now.time()).replace(":", "_").replace(".", "_")
+
+        inference_generator = torch.Generator(device="cuda")
+        inference_generator.manual_seed(seed)
+        
+        if base_model == "ModelscopeT2V":
+            short_video = ms_short_gen(prompt, model, inference_generator)
+        elif base_model == "AnimateDiff":
+            short_video = ad_short_gen(prompt, model, inference_generator)
+        elif base_model == "SVD":
+            short_video = svd_short_gen(image, prompt, model, sdxl_model, inference_generator)
+
+        n_autoreg_gen = (num_frames-8)//8
+        stream_long_gen(prompt, short_video, n_autoreg_gen, seed, num_steps, image_guidance, name, stream_cli, stream_model)
+
+        cfg_v2v = {'downscale': 1, 'upscale_size': (1280, 720), 'model_id': 'damo/Video-to-Video', 'pad': True}
+        if num_frames > 80:
+            video2video_randomized(prompt, opj(result_fol, name+".mp4"), result_fol, cfg_v2v, msxl_model, chunk_size=chunk, overlap_size=overlap)
+        else:
+            video2video(prompt, opj(result_fol, name+".mp4"), result_fol, cfg_v2v, msxl_model)
+        return f'{result_fol}/{name}.mp4'
+
+
+NODE_CLASS_MAPPINGS = {
+    "StreamingT2VLoaderModelscopeT2V":StreamingT2VLoaderModelscopeT2V,
+    "StreamingT2VLoaderAnimateDiff":StreamingT2VLoaderAnimateDiff,
+    "StreamingT2VLoaderSVD":StreamingT2VLoaderSVD,
+    "StreamingT2VRunT2V":StreamingT2VRunT2V,
+    "StreamingT2VRunI2V":StreamingT2VRunI2V,
+}
+
+import logging
+logging_level = logging.INFO
+
+logging.basicConfig(format="%(message)s", level=logging_level)
