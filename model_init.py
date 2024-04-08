@@ -68,7 +68,7 @@ def init_svd(device="cuda"):
 
 
 # Initialize StreamingT2V model.
-def init_streamingt2v_model(ckpt_file, result_fol):
+def init_streamingt2v_model(ckpt_file, result_fol,vram_not_enough):
     import os
     import folder_paths
     comfy_path = os.path.dirname(folder_paths.__file__)
@@ -105,8 +105,10 @@ def init_streamingt2v_model(ckpt_file, result_fol):
                         auto_configure_optimizers=False, parser_kwargs={"parser_mode": "omegaconf"}, save_config_callback=SaveConfigCallback, save_config_kwargs={"log_dir": result_fol, "overwrite": True})
 
         model = cli.model
-        model.load_state_dict(torch.load(
-            cli.config["ckpt"].as_posix(),map_location='cpu')["state_dict"])
+        if vram_not_enough:
+            model.load_state_dict(torch.load(cli.config["ckpt"].as_posix(),map_location='cpu')["state_dict"])
+        else:
+            model.load_state_dict(torch.load(cli.config["ckpt"].as_posix())["state_dict"])
     return cli, model
 
 

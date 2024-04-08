@@ -39,6 +39,7 @@ class StreamingT2VLoaderModelscopeT2V:
             "required": {
                 "ckpt_name": (folder_paths.get_filename_list("checkpoints"), {"default": "streaming_t2v.ckpt"}),
                 "device":("STRING",{"default":"cuda"}),
+                "vram_not_enough":("BOOLEAN",{"default":True}),
             },
         }
 
@@ -46,13 +47,13 @@ class StreamingT2VLoaderModelscopeT2V:
     FUNCTION = "run"
     CATEGORY = "StreamingT2V"
 
-    def run(self,ckpt_name,device):
+    def run(self,ckpt_name,device,vram_not_enough):
         sdxl_model=None
         base_model="ModelscopeT2V"
         result_fol = folder_paths.get_output_directory()
         ckpt_file_streaming_t2v = folder_paths.get_full_path("checkpoints", ckpt_name)
         cfg_v2v = {'downscale': 1, 'upscale_size': (1280, 720), 'model_id': 'damo/Video-to-Video', 'pad': True}
-        stream_cli, stream_model = init_streamingt2v_model(Path(ckpt_file_streaming_t2v).absolute(), Path(result_fol).absolute())
+        stream_cli, stream_model = init_streamingt2v_model(Path(ckpt_file_streaming_t2v).absolute(), Path(result_fol).absolute(),vram_not_enough)
         if base_model == "ModelscopeT2V":
             model = init_modelscope(device)
         elif base_model == "AnimateDiff":
@@ -71,6 +72,7 @@ class StreamingT2VLoaderAnimateDiff:
             "required": {
                 "ckpt_name": (folder_paths.get_filename_list("checkpoints"), {"default": "streaming_t2v.ckpt"}),
                 "device":("STRING",{"default":"cuda"}),
+                "vram_not_enough":("BOOLEAN",{"default":True}),
             },
         }
 
@@ -78,13 +80,13 @@ class StreamingT2VLoaderAnimateDiff:
     FUNCTION = "run"
     CATEGORY = "StreamingT2V"
 
-    def run(self,ckpt_name,device):
+    def run(self,ckpt_name,device,vram_not_enough):
         sdxl_model=None
         base_model="AnimateDiff"
         result_fol = folder_paths.get_output_directory()
         ckpt_file_streaming_t2v = folder_paths.get_full_path("checkpoints", ckpt_name)
         cfg_v2v = {'downscale': 1, 'upscale_size': (1280, 720), 'model_id': 'damo/Video-to-Video', 'pad': True}
-        stream_cli, stream_model = init_streamingt2v_model(Path(ckpt_file_streaming_t2v).absolute(), Path(result_fol).absolute())
+        stream_cli, stream_model = init_streamingt2v_model(Path(ckpt_file_streaming_t2v).absolute(), Path(result_fol).absolute(),vram_not_enough)
         if base_model == "ModelscopeT2V":
             model = init_modelscope(device)
         elif base_model == "AnimateDiff":
@@ -103,6 +105,7 @@ class StreamingT2VLoaderSVD:
             "required": {
                 "ckpt_name": (folder_paths.get_filename_list("checkpoints"), {"default": "streaming_t2v.ckpt"}),
                 "device":("STRING",{"default":"cuda"}),
+                "vram_not_enough":("BOOLEAN",{"default":True}),
             },
         }
 
@@ -110,13 +113,13 @@ class StreamingT2VLoaderSVD:
     FUNCTION = "run"
     CATEGORY = "StreamingT2V"
 
-    def run(self,ckpt_name,device):
+    def run(self,ckpt_name,device,vram_not_enough):
         sdxl_model=None
         base_model="SVD"
         result_fol = folder_paths.get_output_directory()
         ckpt_file_streaming_t2v = folder_paths.get_full_path("checkpoints", ckpt_name)
         cfg_v2v = {'downscale': 1, 'upscale_size': (1280, 720), 'model_id': 'damo/Video-to-Video', 'pad': True}
-        stream_cli, stream_model = init_streamingt2v_model(Path(ckpt_file_streaming_t2v).absolute(), Path(result_fol).absolute())
+        stream_cli, stream_model = init_streamingt2v_model(Path(ckpt_file_streaming_t2v).absolute(), Path(result_fol).absolute(),vram_not_enough)
         if base_model == "ModelscopeT2V":
             model = init_modelscope(device)
         elif base_model == "AnimateDiff":
