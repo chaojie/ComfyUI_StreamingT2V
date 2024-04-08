@@ -1,7 +1,5 @@
 # ComfyUI-StreamingT2V
 
-32G VRAM required
-
 Download model from https://huggingface.co/PAIR/StreamingT2V/blob/main/streaming_t2v.ckpt
 
 Put streaming_t2v.ckpt to ComfyUI/model/checkpoints folder

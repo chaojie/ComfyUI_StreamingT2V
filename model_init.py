@@ -106,12 +106,12 @@ def init_streamingt2v_model(ckpt_file, result_fol):
 
         model = cli.model
         model.load_state_dict(torch.load(
-            cli.config["ckpt"].as_posix())["state_dict"])
+            cli.config["ckpt"].as_posix(),map_location='cpu')["state_dict"])
     return cli, model
 
 
 # Initialize Stage-3 model.
-def init_v2v_model(cfg):
+def init_v2v_model(cfg,device):
     model_id = cfg['model_id']
-    pipe_enhance = pipeline(task="video-to-video", model=model_id, model_revision='v1.1.0', device='cuda')
+    pipe_enhance = pipeline(task="video-to-video", model=model_id, model_revision='v1.1.0', device=device)
     return pipe_enhance

@@ -61,7 +61,7 @@ class StreamingT2VLoaderModelscopeT2V:
             model = init_svd(device)
             sdxl_model = init_sdxl(device)
         
-        msxl_model = init_v2v_model(cfg_v2v)
+        msxl_model = init_v2v_model(cfg_v2v,device)
         return ((model,sdxl_model,msxl_model,base_model,stream_cli, stream_model),)
 
 class StreamingT2VLoaderAnimateDiff:
@@ -93,7 +93,7 @@ class StreamingT2VLoaderAnimateDiff:
             model = init_svd(device)
             sdxl_model = init_sdxl(device)
         
-        msxl_model = init_v2v_model(cfg_v2v)
+        msxl_model = init_v2v_model(cfg_v2v,device)
         return ((model,sdxl_model,msxl_model,base_model,stream_cli, stream_model),)
 
 class StreamingT2VLoaderSVD:
@@ -125,7 +125,7 @@ class StreamingT2VLoaderSVD:
             model = init_svd(device)
             sdxl_model = init_sdxl(device)
         
-        msxl_model = init_v2v_model(cfg_v2v)
+        msxl_model = init_v2v_model(cfg_v2v,device)
         return ((model,sdxl_model,msxl_model,base_model,stream_cli, stream_model),)
 
 
@@ -179,7 +179,7 @@ class StreamingT2VRunT2V:
             video2video_randomized(prompt, opj(result_fol, name+".mp4"), result_fol, cfg_v2v, msxl_model, chunk_size=chunk, overlap_size=overlap)
         else:
             video2video(prompt, opj(result_fol, name+".mp4"), result_fol, cfg_v2v, msxl_model)
-        return f'{result_fol}/{name}.mp4'
+        return (f'{result_fol}/{name}.mp4',)
 
 
 class StreamingT2VRunI2V:
@@ -238,7 +238,7 @@ class StreamingT2VRunI2V:
             video2video_randomized(prompt, opj(result_fol, name+".mp4"), result_fol, cfg_v2v, msxl_model, chunk_size=chunk, overlap_size=overlap)
         else:
             video2video(prompt, opj(result_fol, name+".mp4"), result_fol, cfg_v2v, msxl_model)
-        return f'{result_fol}/{name}.mp4'
+        return (f'{result_fol}/{name}.mp4',)
 
 
 NODE_CLASS_MAPPINGS = {

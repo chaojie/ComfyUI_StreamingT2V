@@ -6,7 +6,7 @@ trainer:
   devices: '8'
   num_nodes: 1
   # precision: 16-mixed
-  logger: null
+  # logger: null
   callbacks:
   - class_path: pytorch_lightning.callbacks.RichModelSummary
     init_args:
