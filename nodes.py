@@ -178,11 +178,12 @@ class StreamingT2VRunT2V:
         stream_long_gen(prompt, short_video, n_autoreg_gen, seed, num_steps, image_guidance, name, stream_cli, stream_model)
 
         cfg_v2v = {'downscale': 1, 'upscale_size': (1280, 720), 'model_id': 'damo/Video-to-Video', 'pad': True}
+        ret=f'{result_fol}/{name}.mp4'
         if num_frames > 80:
-            video2video_randomized(prompt, opj(result_fol, name+".mp4"), result_fol, cfg_v2v, msxl_model, chunk_size=chunk, overlap_size=overlap)
+            ret=video2video_randomized(prompt, opj(result_fol, name+".mp4"), result_fol, cfg_v2v, msxl_model, chunk_size=chunk, overlap_size=overlap)
         else:
-            video2video(prompt, opj(result_fol, name+".mp4"), result_fol, cfg_v2v, msxl_model)
-        return (f'{result_fol}/{name}.mp4',)
+            ret=video2video(prompt, opj(result_fol, name+".mp4"), result_fol, cfg_v2v, msxl_model)
+        return (ret,)
 
 
 class StreamingT2VRunI2V:
@@ -237,11 +238,12 @@ class StreamingT2VRunI2V:
         stream_long_gen(prompt, short_video, n_autoreg_gen, seed, num_steps, image_guidance, name, stream_cli, stream_model)
 
         cfg_v2v = {'downscale': 1, 'upscale_size': (1280, 720), 'model_id': 'damo/Video-to-Video', 'pad': True}
+        ret=f'{result_fol}/{name}.mp4'
         if num_frames > 80:
-            video2video_randomized(prompt, opj(result_fol, name+".mp4"), result_fol, cfg_v2v, msxl_model, chunk_size=chunk, overlap_size=overlap)
+            ret=video2video_randomized(prompt, opj(result_fol, name+".mp4"), result_fol, cfg_v2v, msxl_model, chunk_size=chunk, overlap_size=overlap)
         else:
-            video2video(prompt, opj(result_fol, name+".mp4"), result_fol, cfg_v2v, msxl_model)
-        return (f'{result_fol}/{name}.mp4',)
+            ret=video2video(prompt, opj(result_fol, name+".mp4"), result_fol, cfg_v2v, msxl_model)
+        return (ret,)
 
 
 NODE_CLASS_MAPPINGS = {
