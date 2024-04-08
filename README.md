@@ -10,6 +10,8 @@ ModelscopeT2V (T2V)
 
 https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/wf.json
 
+<img src="wf.png" raw=true>
+
 AnimateDiff (T2V)
 
 https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/wf_ad.json

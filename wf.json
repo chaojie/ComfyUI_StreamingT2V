@@ -3,39 +3,6 @@
   "last_link_id": 3,
   "nodes": [
     {
-      "id": 1,
-      "type": "StreamingT2VLoaderModelscopeT2V",
-      "pos": [
-        524,
-        28.000015258789062
-      ],
-      "size": {
-        "0": 315,
-        "1": 82
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "StreamingT2VModel",
-          "type": "StreamingT2VModel",
-          "links": [
-            1
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "StreamingT2VLoaderModelscopeT2V"
-      },
-      "widgets_values": [
-        "streaming_t2v.ckpt",
-        "cuda"
-      ]
-    },
-    {
       "id": 2,
       "type": "StreamingT2VRunT2V",
       "pos": [
@@ -76,7 +43,7 @@
         24,
         50,
         9,
-        2016,
+        678,
         "randomize",
         56,
         32
@@ -89,10 +56,10 @@
         1875.000244140625,
         42.999969482421875
       ],
-      "size": {
-        "0": 315,
-        "1": 218
-      },
+      "size": [
+        315,
+        527
+      ],
       "flags": {},
       "order": 3,
       "mode": 0,
@@ -134,7 +101,12 @@
         "videopreview": {
           "hidden": false,
           "paused": false,
-          "params": {}
+          "params": {
+            "filename": "AnimateDiff_00012.gif",
+            "subfolder": "",
+            "type": "output",
+            "format": "image/gif"
+          }
         }
       }
     },
@@ -147,7 +119,7 @@
       ],
       "size": [
         317.4000244140625,
-        238
+        214
       ],
       "flags": {},
       "order": 2,
@@ -222,6 +194,40 @@
           }
         }
       }
+    },
+    {
+      "id": 1,
+      "type": "StreamingT2VLoaderModelscopeT2V",
+      "pos": [
+        524,
+        28.000015258789062
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "StreamingT2VModel",
+          "type": "StreamingT2VModel",
+          "links": [
+            1
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "StreamingT2VLoaderModelscopeT2V"
+      },
+      "widgets_values": [
+        "streaming_t2v.ckpt",
+        "cuda",
+        true
+      ]
     }
   ],
   "links": [
