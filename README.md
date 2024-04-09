@@ -26,7 +26,7 @@ https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/wf_long.json
 
 <img src="wf_long.png" raw=true>
 
-### Step 3 Generate long video (nx256x256):
+### Step 3 Generate long enhanced video (nx512x512):
 
 https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/wf_enhance.json
 
