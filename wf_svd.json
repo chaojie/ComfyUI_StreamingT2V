@@ -1,197 +1,17 @@
 {
-  "last_node_id": 7,
-  "last_link_id": 5,
+  "last_node_id": 13,
+  "last_link_id": 10,
   "nodes": [
     {
-      "id": 3,
-      "type": "StreamingT2VLoaderSVD",
-      "pos": [
-        230,
-        515
-      ],
-      "size": {
-        "0": 315,
-        "1": 82
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "StreamingT2VModelSVD",
-          "type": "StreamingT2VModelSVD",
-          "links": [
-            2
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "StreamingT2VLoaderSVD"
-      },
-      "widgets_values": [
-        "streaming_t2v.ckpt",
-        "cuda"
-      ]
-    },
-    {
-      "id": 5,
-      "type": "LoadImage",
-      "pos": [
-        222,
-        709
-      ],
-      "size": {
-        "0": 315,
-        "1": 314
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            3
-          ],
-          "shape": 3,
-          "slot_index": 0
-        },
-        {
-          "name": "MASK",
-          "type": "MASK",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LoadImage"
-      },
-      "widgets_values": [
-        "example.png",
-        "image"
-      ]
-    },
-    {
-      "id": 4,
-      "type": "StreamingT2VRunI2V",
-      "pos": [
-        704,
-        521
-      ],
-      "size": {
-        "0": 393,
-        "1": 270
-      },
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "StreamingT2VModelSVD",
-          "type": "StreamingT2VModelSVD",
-          "link": 2
-        },
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 3
-        }
-      ],
-      "outputs": [
-        {
-          "name": "video_path",
-          "type": "STRING",
-          "links": [
-            4
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "StreamingT2VRunI2V"
-      },
-      "widgets_values": [
-        "1girl dancing",
-        "",
-        24,
-        50,
-        9,
-        1690,
-        "randomize",
-        56,
-        32
-      ]
-    },
-    {
-      "id": 7,
-      "type": "VHS_VideoCombine",
-      "pos": [
-        1628.9999389648438,
-        540
-      ],
-      "size": {
-        "0": 315,
-        "1": 218
-      },
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 5
-        },
-        {
-          "name": "audio",
-          "type": "VHS_AUDIO",
-          "link": null
-        },
-        {
-          "name": "batch_manager",
-          "type": "VHS_BatchManager",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "Filenames",
-          "type": "VHS_FILENAMES",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "VHS_VideoCombine"
-      },
-      "widgets_values": {
-        "frame_rate": 8,
-        "loop_count": 0,
-        "filename_prefix": "AnimateDiff",
-        "format": "image/gif",
-        "pingpong": false,
-        "save_output": true,
-        "videopreview": {
-          "hidden": false,
-          "paused": false,
-          "params": {}
-        }
-      }
-    },
-    {
-      "id": 6,
+      "id": 12,
       "type": "VHS_LoadVideoPath",
       "pos": [
-        1202.9999389648438,
-        541
+        1645.645349121094,
+        677.4635467529297
       ],
       "size": [
         317.4000244140625,
-        238
+        214
       ],
       "flags": {},
       "order": 3,
@@ -205,7 +25,7 @@
         {
           "name": "video",
           "type": "STRING",
-          "link": 4,
+          "link": 8,
           "widget": {
             "name": "video"
           }
@@ -216,7 +36,7 @@
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            5
+            9
           ],
           "shape": 3,
           "slot_index": 0
@@ -266,39 +86,228 @@
           }
         }
       }
+    },
+    {
+      "id": 9,
+      "type": "StreamingT2VLoaderSVD",
+      "pos": [
+        631,
+        357
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "StreamingT2VModelSVD",
+          "type": "StreamingT2VModelSVD",
+          "links": [
+            7
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "StreamingT2VLoaderSVD"
+      },
+      "widgets_values": [
+        "streaming_t2v.ckpt",
+        "cuda",
+        true
+      ]
+    },
+    {
+      "id": 13,
+      "type": "LoadImage",
+      "pos": [
+        732,
+        600
+      ],
+      "size": [
+        315,
+        314.00001525878906
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            10
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "src=http___image109.360doc.com_DownloadImg_2020_09_2216_202861621_2_20200922042822806_wm&refer=http___image109.360doc.webp",
+        "image"
+      ]
+    },
+    {
+      "id": 10,
+      "type": "StreamingT2VRunI2V",
+      "pos": [
+        1190.2453979492188,
+        373.8635498046875
+      ],
+      "size": {
+        "0": 393,
+        "1": 270
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "StreamingT2VModelSVD",
+          "type": "StreamingT2VModelSVD",
+          "link": 7
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 10
+        }
+      ],
+      "outputs": [
+        {
+          "name": "video_path",
+          "type": "STRING",
+          "links": [
+            8
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "StreamingT2VRunI2V"
+      },
+      "widgets_values": [
+        "1girl running",
+        "",
+        24,
+        50,
+        9,
+        1555,
+        "randomize",
+        56,
+        32
+      ]
+    },
+    {
+      "id": 11,
+      "type": "VHS_VideoCombine",
+      "pos": [
+        2026,
+        636
+      ],
+      "size": [
+        315,
+        599
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 9
+        },
+        {
+          "name": "audio",
+          "type": "VHS_AUDIO",
+          "link": null
+        },
+        {
+          "name": "batch_manager",
+          "type": "VHS_BatchManager",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VHS_VideoCombine"
+      },
+      "widgets_values": {
+        "frame_rate": 8,
+        "loop_count": 0,
+        "filename_prefix": "AnimateDiff",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "pingpong": false,
+        "save_output": true,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "AnimateDiff_00017.gif",
+            "subfolder": "",
+            "type": "output",
+            "format": "image/gif"
+          }
+        }
+      }
     }
   ],
   "links": [
     [
-      2,
-      3,
+      7,
+      9,
       0,
-      4,
+      10,
       0,
       "StreamingT2VModelSVD"
     ],
     [
-      3,
-      5,
+      8,
+      10,
       0,
-      4,
-      1,
-      "IMAGE"
-    ],
-    [
-      4,
-      4,
-      0,
-      6,
+      12,
       1,
       "STRING"
     ],
     [
-      5,
-      6,
+      9,
+      12,
       0,
-      7,
+      11,
       0,
+      "IMAGE"
+    ],
+    [
+      10,
+      13,
+      0,
+      10,
+      1,
       "IMAGE"
     ]
   ],

@@ -1,6 +1,6 @@
 {
-  "last_node_id": 5,
-  "last_link_id": 4,
+  "last_node_id": 13,
+  "last_link_id": 10,
   "nodes": [
     {
       "id": 2,
@@ -20,7 +20,7 @@
         {
           "name": "StreamingT2VModel",
           "type": "StreamingT2VModel",
-          "link": 4
+          "link": 6
         }
       ],
       "outputs": [
@@ -43,7 +43,7 @@
         24,
         50,
         9,
-        2016,
+        1567,
         "randomize",
         56,
         32
@@ -56,10 +56,10 @@
         1875.000244140625,
         42.999969482421875
       ],
-      "size": {
-        "0": 315,
-        "1": 218
-      },
+      "size": [
+        315,
+        527
+      ],
       "flags": {},
       "order": 3,
       "mode": 0,
@@ -101,7 +101,12 @@
         "videopreview": {
           "hidden": false,
           "paused": false,
-          "params": {}
+          "params": {
+            "filename": "AnimateDiff_00016.gif",
+            "subfolder": "",
+            "type": "output",
+            "format": "image/gif"
+          }
         }
       }
     },
@@ -114,7 +119,7 @@
       ],
       "size": [
         317.4000244140625,
-        238
+        214
       ],
       "flags": {},
       "order": 2,
@@ -191,15 +196,15 @@
       }
     },
     {
-      "id": 5,
+      "id": 7,
       "type": "StreamingT2VLoaderAnimateDiff",
       "pos": [
-        616,
-        91
+        626,
+        114
       ],
       "size": {
         "0": 315,
-        "1": 82
+        "1": 106
       },
       "flags": {},
       "order": 0,
@@ -209,7 +214,7 @@
           "name": "StreamingT2VModel",
           "type": "StreamingT2VModel",
           "links": [
-            4
+            6
           ],
           "shape": 3,
           "slot_index": 0
@@ -220,7 +225,8 @@
       },
       "widgets_values": [
         "streaming_t2v.ckpt",
-        "cuda"
+        "cuda",
+        true
       ]
     }
   ],
@@ -242,8 +248,8 @@
       "IMAGE"
     ],
     [
-      4,
-      5,
+      6,
+      7,
       0,
       2,
       0,

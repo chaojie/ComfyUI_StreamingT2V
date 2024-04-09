@@ -18,8 +18,12 @@ AnimateDiff (T2V)
 
 https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/wf_ad.json
 
+<img src="wf_ad.png" raw=true>
+
 SVD (I2V)
 
 https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/wf_svd.json
+
+<img src="wf_svd.png" raw=true>
 
 ## [StreamingT2V](https://github.com/Picsart-AI-Research/StreamingT2V)

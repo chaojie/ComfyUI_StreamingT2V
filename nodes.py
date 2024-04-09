@@ -120,6 +120,11 @@ class StreamingT2VLoaderSVD:
         ckpt_file_streaming_t2v = folder_paths.get_full_path("checkpoints", ckpt_name)
         cfg_v2v = {'downscale': 1, 'upscale_size': (1280, 720), 'model_id': 'damo/Video-to-Video', 'pad': True}
         stream_cli, stream_model = init_streamingt2v_model(Path(ckpt_file_streaming_t2v).absolute(), Path(result_fol).absolute(),vram_not_enough)
+
+        predevice=device
+        if vram_not_enough:
+            device='cpu'
+        
         if base_model == "ModelscopeT2V":
             model = init_modelscope(device)
         elif base_model == "AnimateDiff":
@@ -127,7 +132,8 @@ class StreamingT2VLoaderSVD:
         elif base_model == "SVD":
             model = init_svd(device)
             sdxl_model = init_sdxl(device)
-        
+
+        device=predevice
         msxl_model = init_v2v_model(cfg_v2v,device)
         return ((model,sdxl_model,msxl_model,base_model,stream_cli, stream_model),)
 
@@ -214,7 +220,9 @@ class StreamingT2VRunI2V:
         image = 255.0 * image[0].cpu().numpy()
         image = Image.fromarray(np.clip(image, 0, 255).astype(np.uint8))
         input_fol = folder_paths.get_input_directory()
-        image=f'{input_fol}/i2v.png'
+        image_path=f'{input_fol}/i2v.png'
+        image.save(image_path)
+        image=image_path
 
         result_fol = folder_paths.get_output_directory()
         model,sdxl_model,msxl_model,base_model,stream_cli, stream_model=StreamingT2VModelSVD
