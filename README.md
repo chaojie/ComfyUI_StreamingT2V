@@ -34,7 +34,7 @@ https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/wf_enhance.json
 
 <img src="wf_enhance.png" raw=true>
 
-### You can generate all by one workflow
+### You can generate all by one workflow (MORE VRAM)
 
 ModelscopeT2V (T2V)
 
