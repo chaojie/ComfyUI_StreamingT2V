@@ -107,8 +107,10 @@ def init_streamingt2v_model(ckpt_file, result_fol,vram_not_enough):
         model = cli.model
         if vram_not_enough:
             model.load_state_dict(torch.load(cli.config["ckpt"].as_posix(),map_location='cpu')["state_dict"])
+            #model.eval().to(torch.device('cuda'))
         else:
-            model.load_state_dict(torch.load(cli.config["ckpt"].as_posix())["state_dict"])
+            model.load_state_dict(torch.load(cli.config["ckpt"].as_posix(),map_location='cpu')["state_dict"])
+            model.eval().to(torch.device('cuda'))
     return cli, model
 
 

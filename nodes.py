@@ -38,7 +38,7 @@ class StreamingT2VLoaderModelscopeT2V:
         return {
             "required": {
                 "ckpt_name": (folder_paths.get_filename_list("checkpoints"), {"default": "streaming_t2v.ckpt"}),
-                "device":("STRING",{"default":"cuda"}),
+                "device":(["cuda","cpu"],{"default":"cuda"}),
                 "vram_not_enough":("BOOLEAN",{"default":True}),
             },
         }
@@ -71,7 +71,7 @@ class StreamingT2VLoaderAnimateDiff:
         return {
             "required": {
                 "ckpt_name": (folder_paths.get_filename_list("checkpoints"), {"default": "streaming_t2v.ckpt"}),
-                "device":("STRING",{"default":"cuda"}),
+                "device":(["cuda","cpu"],{"default":"cuda"}),
                 "vram_not_enough":("BOOLEAN",{"default":True}),
             },
         }
@@ -104,7 +104,7 @@ class StreamingT2VLoaderSVD:
         return {
             "required": {
                 "ckpt_name": (folder_paths.get_filename_list("checkpoints"), {"default": "streaming_t2v.ckpt"}),
-                "device":("STRING",{"default":"cuda"}),
+                "device":(["cuda","cpu"],{"default":"cuda"}),
                 "vram_not_enough":("BOOLEAN",{"default":True}),
             },
         }
@@ -254,12 +254,276 @@ class StreamingT2VRunI2V:
         return (ret,)
 
 
+class StreamingT2VLoaderModelscopeModel:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "device":(["cuda","cpu"],{"default":"cuda"}),
+            },
+        }
+
+    RETURN_TYPES = ("T2VModel",)
+    FUNCTION = "run"
+    CATEGORY = "StreamingT2V"
+
+    def run(self,device):
+        model = init_modelscope(device)
+        return (model,)
+
+class StreamingT2VLoaderAnimateDiffModel:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "device":(["cuda","cpu"],{"default":"cuda"}),
+            },
+        }
+
+    RETURN_TYPES = ("T2VModel",)
+    FUNCTION = "run"
+    CATEGORY = "StreamingT2V"
+
+    def run(self,device):
+        model = init_animatediff(device)
+        return (model,)
+
+class StreamingT2VLoaderSVDModel:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "device":(["cuda","cpu"],{"default":"cuda"}),
+            },
+        }
+
+    RETURN_TYPES = ("I2VModel",)
+    FUNCTION = "run"
+    CATEGORY = "StreamingT2V"
+
+    def run(self,device):
+        model = init_svd(device)
+        return (model,)
+
+class StreamingT2VLoaderEnhanceModel:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "device":(["cuda","cpu"],{"default":"cuda"}),
+            },
+        }
+
+    RETURN_TYPES = ("msxl_model",)
+    FUNCTION = "run"
+    CATEGORY = "StreamingT2V"
+
+    def run(self,device):
+        cfg_v2v = {'downscale': 1, 'upscale_size': (1280, 720), 'model_id': 'damo/Video-to-Video', 'pad': True}
+        msxl_model = init_v2v_model(cfg_v2v,device)
+        return (msxl_model,)
+
+class StreamingT2VLoaderStreamModel:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "ckpt_name": (folder_paths.get_filename_list("checkpoints"), {"default": "streaming_t2v.ckpt"}),
+                "device":(["cuda","cpu"],{"default":"cpu"}),
+            },
+        }
+
+    RETURN_TYPES = ("stream_cli", "stream_model",)
+    FUNCTION = "run"
+    CATEGORY = "StreamingT2V"
+
+    def run(self,ckpt_name,device):
+        vram_not_enough=False
+        if device=="cpu":
+            vram_not_enough=True
+        result_fol = folder_paths.get_output_directory()
+        ckpt_file_streaming_t2v = folder_paths.get_full_path("checkpoints", ckpt_name)
+        cfg_v2v = {'downscale': 1, 'upscale_size': (1280, 720), 'model_id': 'damo/Video-to-Video', 'pad': True}
+        stream_cli, stream_model = init_streamingt2v_model(Path(ckpt_file_streaming_t2v).absolute(), Path(result_fol).absolute(),vram_not_enough)
+        
+        return (stream_cli, stream_model,)
+
+class StreamingT2VRunShortStepModelscopeT2V:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "model": ("T2VModel",),
+                "prompt":("STRING",{"default":"A cat running on the street"}),
+                "seed": ("INT", {"default": 33}),
+            },
+        }
+
+    RETURN_TYPES = ("IMAGE",)
+    RETURN_NAMES = ("short_video",)
+    FUNCTION = "run"
+    OUTPUT_NODE = True
+    CATEGORY = "StreamingT2V"
+
+    def run(self,model,prompt,seed):
+        inference_generator = torch.Generator(device="cuda")
+
+        inference_generator = torch.Generator(device="cuda")
+        inference_generator.manual_seed(seed)
+        
+        short_video = ms_short_gen(prompt, model, inference_generator)
+        short_video = short_video.permute(0,2,3,1)
+
+        return (short_video,)
+
+class StreamingT2VRunShortStepAnimateDiff:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "model": ("T2VModel",),
+                "prompt":("STRING",{"default":"A cat running on the street"}),
+                "seed": ("INT", {"default": 33}),
+            },
+        }
+
+    RETURN_TYPES = ("IMAGE",)
+    RETURN_NAMES = ("short_video",)
+    FUNCTION = "run"
+    OUTPUT_NODE = True
+    CATEGORY = "StreamingT2V"
+
+    def run(self,model,prompt,seed):
+        inference_generator = torch.Generator(device="cuda")
+
+        inference_generator = torch.Generator(device="cuda")
+        inference_generator.manual_seed(seed)
+        
+        short_video = ad_short_gen(prompt, model, inference_generator)
+        print(f'{short_video.shape}')
+        short_video = short_video.permute(0,2,3,1)
+
+        return (short_video,)
+
+class StreamingT2VRunShortStepSVD:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "model": ("I2VModel",),
+                "image": ("IMAGE",),
+                "prompt":("STRING",{"default":"A cat running on the street"}),
+                "seed": ("INT", {"default": 33}),
+            },
+        }
+
+    RETURN_TYPES = ("IMAGE",)
+    RETURN_NAMES = ("short_video",)
+    FUNCTION = "run"
+    OUTPUT_NODE = True
+    CATEGORY = "StreamingT2V"
+
+    def run(self,model,image,prompt,seed):
+        image = 255.0 * image[0].cpu().numpy()
+        image = Image.fromarray(np.clip(image, 0, 255).astype(np.uint8))
+        input_fol = folder_paths.get_input_directory()
+        image_path=f'{input_fol}/i2v.png'
+        image.save(image_path)
+        image=image_path
+
+        inference_generator = torch.Generator(device="cuda")
+
+        inference_generator = torch.Generator(device="cuda")
+        inference_generator.manual_seed(seed)
+        
+        short_video = svd_short_gen(image, prompt, model, None, inference_generator)
+        short_video = short_video.permute(0,2,3,1)
+
+        return (short_video,)
+
+class StreamingT2VRunLongStep:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "stream_cli": ("stream_cli",),
+                "stream_model": ("stream_model",),
+                "short_video":("IMAGE",),
+                "prompt":("STRING",{"default":"A cat running on the street"}),
+                "num_frames": ("INT", {"default": 24}),
+                "num_steps": ("INT", {"default": 50}),
+                "image_guidance": ("FLOAT", {"default": 9.0}),
+                "seed": ("INT", {"default": 33}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("low_video_path",)
+    FUNCTION = "run"
+    OUTPUT_NODE = True
+    CATEGORY = "StreamingT2V"
+
+    def run(self,stream_cli, stream_model,short_video,prompt,num_frames,num_steps,image_guidance,seed):
+        short_video=short_video.permute(0,3,1,2)
+        print(f'{short_video.shape}')
+
+        result_fol = folder_paths.get_output_directory()
+        now = datetime.datetime.now()
+        name = prompt[:100].replace(" ", "_") + "_" + str(now.time()).replace(":", "_").replace(".", "_")
+        
+        n_autoreg_gen = (num_frames-8)//8
+        stream_long_gen(prompt, short_video, n_autoreg_gen, seed, num_steps, image_guidance, name, stream_cli, stream_model)
+
+        return (opj(result_fol, name+".mp4"),)
+
+class StreamingT2VRunEnhanceStep:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "msxl_model": ("msxl_model",),
+                "low_video_path":("STRING",{"default":""}),
+                "prompt":("STRING",{"default":"A cat running on the street"}),
+                "num_frames": ("INT", {"default": 24}),
+                "chunk": ("INT", {"default": 56}),
+                "overlap": ("INT", {"default": 32}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("video_path",)
+    FUNCTION = "run"
+    OUTPUT_NODE = True
+    CATEGORY = "StreamingT2V"
+
+    def run(self,msxl_model,low_video_path,prompt,num_frames,chunk,overlap):
+        result_fol = folder_paths.get_output_directory()
+
+        cfg_v2v = {'downscale': 1, 'upscale_size': (1280, 720), 'model_id': 'damo/Video-to-Video', 'pad': True}
+        ret=f''
+        if num_frames > 80:
+            ret=video2video_randomized(prompt, low_video_path, result_fol, cfg_v2v, msxl_model, chunk_size=chunk, overlap_size=overlap)
+        else:
+            ret=video2video(prompt, low_video_path, result_fol, cfg_v2v, msxl_model)
+        return (ret,)
+
+
 NODE_CLASS_MAPPINGS = {
     "StreamingT2VLoaderModelscopeT2V":StreamingT2VLoaderModelscopeT2V,
     "StreamingT2VLoaderAnimateDiff":StreamingT2VLoaderAnimateDiff,
     "StreamingT2VLoaderSVD":StreamingT2VLoaderSVD,
     "StreamingT2VRunT2V":StreamingT2VRunT2V,
     "StreamingT2VRunI2V":StreamingT2VRunI2V,
+    "StreamingT2VLoaderModelscopeModel":StreamingT2VLoaderModelscopeModel,
+    "StreamingT2VLoaderAnimateDiffModel":StreamingT2VLoaderAnimateDiffModel,
+    "StreamingT2VLoaderSVDModel":StreamingT2VLoaderSVDModel,
+    "StreamingT2VLoaderEnhanceModel":StreamingT2VLoaderEnhanceModel,
+    "StreamingT2VLoaderStreamModel":StreamingT2VLoaderStreamModel,
+    "StreamingT2VRunShortStepModelscopeT2V":StreamingT2VRunShortStepModelscopeT2V,
+    "StreamingT2VRunShortStepAnimateDiff":StreamingT2VRunShortStepAnimateDiff,
+    "StreamingT2VRunShortStepSVD":StreamingT2VRunShortStepSVD,
+    "StreamingT2VRunLongStep":StreamingT2VRunLongStep,
+    "StreamingT2VRunEnhanceStep":StreamingT2VRunEnhanceStep,
 }
 
 import logging
