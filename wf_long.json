@@ -227,48 +227,6 @@
       }
     },
     {
-      "id": 12,
-      "type": "StreamingT2VLoaderStreamModel",
-      "pos": [
-        219,
-        139
-      ],
-      "size": {
-        "0": 315,
-        "1": 102
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "stream_cli",
-          "type": "stream_cli",
-          "links": [
-            11
-          ],
-          "shape": 3,
-          "slot_index": 0
-        },
-        {
-          "name": "stream_model",
-          "type": "stream_model",
-          "links": [
-            12
-          ],
-          "shape": 3,
-          "slot_index": 1
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "StreamingT2VLoaderStreamModel"
-      },
-      "widgets_values": [
-        "streaming_t2v.ckpt",
-        "cpu"
-      ]
-    },
-    {
       "id": 11,
       "type": "StreamingT2VRunLongStep",
       "pos": [
@@ -318,8 +276,50 @@
         24,
         50,
         9,
-        555,
+        1291,
         "randomize"
+      ]
+    },
+    {
+      "id": 12,
+      "type": "StreamingT2VLoaderStreamModel",
+      "pos": [
+        219,
+        139
+      ],
+      "size": {
+        "0": 315,
+        "1": 102
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "stream_cli",
+          "type": "stream_cli",
+          "links": [
+            11
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "stream_model",
+          "type": "stream_model",
+          "links": [
+            12
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "StreamingT2VLoaderStreamModel"
+      },
+      "widgets_values": [
+        "streaming_t2v.ckpt",
+        "cuda"
       ]
     }
   ],
