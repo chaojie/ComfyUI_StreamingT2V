@@ -609,3 +609,4 @@ import logging
 logging_level = logging.INFO
 
 logging.basicConfig(format="%(message)s", level=logging_level)
+logging.getLogger().addHandler(logging.StreamHandler(sys.stdout))
