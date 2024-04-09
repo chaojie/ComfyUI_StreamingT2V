@@ -1,5 +1,6 @@
 # General
 import os
+import gc
 from os.path import join as opj
 import datetime
 from pathlib import Path
@@ -329,7 +330,7 @@ class StreamingT2VLoaderStreamModel:
         return {
             "required": {
                 "ckpt_name": (folder_paths.get_filename_list("checkpoints"), {"default": "streaming_t2v.ckpt"}),
-                "device":(["cuda","cpu"],{"default":"cpu"}),
+                "device":(["cuda","cpu"],{"default":"cuda"}),
             },
         }
 
@@ -347,6 +348,33 @@ class StreamingT2VLoaderStreamModel:
         stream_cli, stream_model = init_streamingt2v_model(Path(ckpt_file_streaming_t2v).absolute(), Path(result_fol).absolute(),vram_not_enough)
         
         return (stream_cli, stream_model,)
+
+
+class StreamingT2VLoaderVidXTendModel:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "device":(["cuda","cpu"],{"default":"cuda"}),
+            },
+        }
+
+    RETURN_TYPES = ("VidXTendPipeline",)
+    RETURN_NAMES = ("VidXTendPipeline",)
+    FUNCTION = "run"
+    CATEGORY = "StreamingT2V"
+
+    def run(self,device):
+        from vidxtend import VidXTendPipeline
+        pipeline = VidXTendPipeline.from_single_file(
+            "benjamin-paine/vidxtend",
+            torch_dtype=torch.float16,
+            variant="fp16",
+        )
+        pipeline.set_use_memory_efficient_attention_xformers()
+        pipeline.to(device, dtype=torch.float16)
+
+        return (pipeline,)
 
 class StreamingT2VRunShortStepModelscopeT2V:
     @classmethod
@@ -441,6 +469,55 @@ class StreamingT2VRunShortStepSVD:
 
         return (short_video,)
 
+class StreamingT2VRunLongStepVidXTendPipeline:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "VidXTendPipeline": ("VidXTendPipeline",),
+                "short_video":("IMAGE",),
+                "prompt":("STRING",{"default":"A cat running on the street"}),
+                "num_frames": ("INT", {"default": 24}),
+                "num_steps": ("INT", {"default": 50}),
+                "image_guidance": ("FLOAT", {"default": 9.0}),
+                "seed": ("INT", {"default": 33}),
+            },
+        }
+
+    RETURN_TYPES = ("IMAGE",)
+    FUNCTION = "run"
+    CATEGORY = "StreamingT2V"
+
+    def run(self,VidXTendPipeline,short_video,prompt,num_frames,num_steps,image_guidance,seed):
+        images = []
+        for image in short_video:
+            image = 255.0 * image.cpu().numpy()
+            image = Image.fromarray(np.clip(image, 0, 255).astype(np.uint8))
+            images.append(image)
+        #images=short_video.permute(0,3,1,2)
+        generator = torch.Generator(device="cuda")
+        generator.manual_seed(seed)
+        added_frames = len(images)
+        while added_frames < num_frames:
+            result = VidXTendPipeline(
+                prompt=prompt,
+                #num_frames=num_frames,
+                negative_prompt=None, # Optionally use negative prompt
+                image=images[-8:], # Use final 8 frames of video
+                input_frames_conditioning=images[:1], # Use first frame of video
+                eta=1.0,
+                guidance_scale=image_guidance,
+                generator=generator,
+                output_type="pil"
+            ) # Remove the first 8 frames from the output as they were used as guide for final 8
+            images.extend(result.frames[8:])
+            added_frames += 8
+            # Clear memory between iterations
+            torch.cuda.empty_cache()
+            gc.collect()
+        images = [torch.unsqueeze(torch.tensor(np.array(image).astype(np.float32) / 255.0), 0) for image in images]
+        return torch.cat(tuple(images[:num_frames]), dim=0).unsqueeze(0)
+
 class StreamingT2VRunLongStep:
     @classmethod
     def INPUT_TYPES(cls):
@@ -524,6 +601,8 @@ NODE_CLASS_MAPPINGS = {
     "StreamingT2VRunShortStepSVD":StreamingT2VRunShortStepSVD,
     "StreamingT2VRunLongStep":StreamingT2VRunLongStep,
     "StreamingT2VRunEnhanceStep":StreamingT2VRunEnhanceStep,
+    "StreamingT2VLoaderVidXTendModel":StreamingT2VLoaderVidXTendModel,
+    "StreamingT2VRunLongStepVidXTendPipeline":StreamingT2VRunLongStepVidXTendPipeline,
 }
 
 import logging
