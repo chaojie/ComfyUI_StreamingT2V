@@ -8,6 +8,14 @@ VidXTend (<10G VRAM) | Original (<15G VRAM)
 
 ## workflow
 
+[Recommended complete Workflow](https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/workflow/wf_final.json)
+
+[Recommended STAGE 2 Workflow](https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/workflow/wf_VidXTend.json)
+
+<img src="workflow/wf_VidXTend.png" raw=true>
+
+<details> <summary>More Workflow</summary>
+
 ### Step 1 (It's not necessary.) Generate short video (16x256x256):
 
 You can freely generate a 16x256x256 video without using the process below. You can even use videos downloaded from the internet.
@@ -61,3 +69,5 @@ https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/workflow/wf_svd.json
 <img src="workflow/wf_svd.png" raw=true>
 
 ## [StreamingT2V](https://github.com/Picsart-AI-Research/StreamingT2V)
+
+</details>
