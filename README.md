@@ -10,6 +10,8 @@ VidXTend (<10G VRAM) | Original (<15G VRAM)
 
 [Recommended complete Workflow](https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/workflow/wf_final.json)
 
+<img src="workflow/wf_final.png" raw=true>
+
 [Recommended STAGE 2 Workflow](https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/workflow/wf_VidXTend.json)
 
 <img src="workflow/wf_VidXTend.png" raw=true>

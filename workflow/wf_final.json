@@ -6,8 +6,8 @@
       "id": 7,
       "type": "CLIPTextEncode",
       "pos": [
-        413,
-        389
+        837.1779587402339,
+        399.49742943191524
       ],
       "size": {
         "0": 425.27801513671875,
@@ -44,8 +44,8 @@
       "id": 5,
       "type": "EmptyLatentImage",
       "pos": [
-        473,
-        609
+        897.177958740234,
+        619.4974294319152
       ],
       "size": {
         "0": 315,
@@ -74,59 +74,11 @@
       ]
     },
     {
-      "id": 4,
-      "type": "CheckpointLoaderSimple",
-      "pos": [
-        71,
-        192
-      ],
-      "size": {
-        "0": 315,
-        "1": 98
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "MODEL",
-          "type": "MODEL",
-          "links": [
-            10
-          ],
-          "slot_index": 0
-        },
-        {
-          "name": "CLIP",
-          "type": "CLIP",
-          "links": [
-            3,
-            5
-          ],
-          "slot_index": 1
-        },
-        {
-          "name": "VAE",
-          "type": "VAE",
-          "links": [
-            8
-          ],
-          "slot_index": 2
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "CheckpointLoaderSimple"
-      },
-      "widgets_values": [
-        "Minimalism_v2.0.safetensors"
-      ]
-    },
-    {
       "id": 10,
       "type": "ADE_AnimateDiffLoaderGen1",
       "pos": [
-        70,
-        348
+        494.17795874023426,
+        358.49742943191524
       ],
       "size": {
         "0": 315,
@@ -200,8 +152,8 @@
       "id": 8,
       "type": "VAEDecode",
       "pos": [
-        1209,
-        188
+        1633.177958740234,
+        198.49742943191526
       ],
       "size": {
         "0": 210,
@@ -237,75 +189,11 @@
       }
     },
     {
-      "id": 14,
-      "type": "StreamingT2VLoaderVidXTendModel",
-      "pos": [
-        1195,
-        51
-      ],
-      "size": {
-        "0": 315,
-        "1": 58
-      },
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "VidXTendPipeline",
-          "type": "VidXTendPipeline",
-          "links": [
-            13
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "StreamingT2VLoaderVidXTendModel"
-      },
-      "widgets_values": [
-        "cuda"
-      ]
-    },
-    {
-      "id": 16,
-      "type": "StreamingT2VLoaderEnhanceModel",
-      "pos": [
-        2388,
-        49
-      ],
-      "size": {
-        "0": 315,
-        "1": 58
-      },
-      "flags": {},
-      "order": 3,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "msxl_model",
-          "type": "msxl_model",
-          "links": [
-            15
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "StreamingT2VLoaderEnhanceModel"
-      },
-      "widgets_values": [
-        "cuda"
-      ]
-    },
-    {
       "id": 11,
       "type": "VHS_VideoCombine",
       "pos": [
-        2033,
-        199
+        506.8155148437508,
+        1074.0633328353877
       ],
       "size": [
         315,
@@ -359,7 +247,7 @@
           "hidden": false,
           "paused": false,
           "params": {
-            "filename": "AnimateDiff_00038.mp4",
+            "filename": "AnimateDiff_00041.mp4",
             "subfolder": "",
             "type": "output",
             "format": "video/h264-mp4"
@@ -371,8 +259,8 @@
       "id": 18,
       "type": "VHS_FILENAMES_STRING_StreamingT2V",
       "pos": [
-        2402,
-        194
+        954.9382551757835,
+        1013.7920571289062
       ],
       "size": {
         "0": 277.20001220703125,
@@ -408,8 +296,8 @@
       "id": 6,
       "type": "CLIPTextEncode",
       "pos": [
-        415,
-        186
+        839.1779587402339,
+        196.4974294319152
       ],
       "size": {
         "0": 422.84503173828125,
@@ -446,8 +334,8 @@
       "id": 20,
       "type": "VHS_LoadVideoPath",
       "pos": [
-        3151.8190696022725,
-        176.27268635142931
+        1704.7573247780565,
+        996.0647434803353
       ],
       "size": [
         317.4000244140625,
@@ -528,11 +416,179 @@
       }
     },
     {
+      "id": 17,
+      "type": "StreamingT2VRunEnhanceStep",
+      "pos": [
+        1290.9382551757844,
+        1035.792057128906
+      ],
+      "size": {
+        "0": 315,
+        "1": 222
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "msxl_model",
+          "type": "msxl_model",
+          "link": 15
+        },
+        {
+          "name": "low_video_path",
+          "type": "STRING",
+          "link": 18,
+          "widget": {
+            "name": "low_video_path"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "video_path",
+          "type": "STRING",
+          "links": [
+            19
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "StreamingT2VRunEnhanceStep"
+      },
+      "widgets_values": [
+        "",
+        "A girl smiling",
+        24,
+        56,
+        32,
+        1280,
+        720,
+        true
+      ]
+    },
+    {
+      "id": 19,
+      "type": "VHS_VideoCombine",
+      "pos": [
+        2109.9382551757826,
+        897.7920571289058
+      ],
+      "size": [
+        315,
+        599
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 20
+        },
+        {
+          "name": "audio",
+          "type": "VHS_AUDIO",
+          "link": null
+        },
+        {
+          "name": "batch_manager",
+          "type": "VHS_BatchManager",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VHS_VideoCombine"
+      },
+      "widgets_values": {
+        "frame_rate": 25,
+        "loop_count": 0,
+        "filename_prefix": "AnimateDiff",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "pingpong": false,
+        "save_output": true,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "AnimateDiff_00042.mp4",
+            "subfolder": "",
+            "type": "output",
+            "format": "video/h264-mp4"
+          }
+        }
+      }
+    },
+    {
+      "id": 15,
+      "type": "StreamingT2VRunLongStepVidXTendPipeline",
+      "pos": [
+        131.8155148437514,
+        1079.0633328353877
+      ],
+      "size": {
+        "0": 327.6000061035156,
+        "1": 222
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "VidXTendPipeline",
+          "type": "VidXTendPipeline",
+          "link": 13
+        },
+        {
+          "name": "short_video",
+          "type": "IMAGE",
+          "link": 14
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            16
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "StreamingT2VRunLongStepVidXTendPipeline"
+      },
+      "widgets_values": [
+        "A girl smiling",
+        24,
+        50,
+        9,
+        1774,
+        "fixed",
+        "worst quality, normal quality, low quality, low res, blurry, text,watermark, logo, banner, extra digits, cropped,jpeg artifacts, signature, username, error,sketch ,duplicate, ugly, monochrome, horror, geometry, mutation, disgusting"
+      ]
+    },
+    {
       "id": 3,
       "type": "KSampler",
       "pos": [
-        863,
-        186
+        1297.1779587402343,
+        207.49742943191524
       ],
       "size": {
         "0": 315,
@@ -587,171 +643,115 @@
       ]
     },
     {
-      "id": 17,
-      "type": "StreamingT2VRunEnhanceStep",
+      "id": 4,
+      "type": "CheckpointLoaderSimple",
       "pos": [
-        2738,
-        216
+        492.17795874023426,
+        201.4974294319153
       ],
       "size": {
         "0": 315,
-        "1": 222
+        "1": 98
       },
       "flags": {},
-      "order": 12,
+      "order": 1,
       "mode": 0,
-      "inputs": [
-        {
-          "name": "msxl_model",
-          "type": "msxl_model",
-          "link": 15
-        },
-        {
-          "name": "low_video_path",
-          "type": "STRING",
-          "link": 18,
-          "widget": {
-            "name": "low_video_path"
-          }
-        }
-      ],
       "outputs": [
         {
-          "name": "video_path",
-          "type": "STRING",
+          "name": "MODEL",
+          "type": "MODEL",
           "links": [
-            19
+            10
           ],
-          "shape": 3,
           "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            3,
+            5
+          ],
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            8
+          ],
+          "slot_index": 2
         }
       ],
       "properties": {
-        "Node name for S&R": "StreamingT2VRunEnhanceStep"
+        "Node name for S&R": "CheckpointLoaderSimple"
       },
       "widgets_values": [
-        "",
-        "A girl smiling",
-        24,
-        56,
-        32,
-        1280,
-        720,
-        true
+        "Minimalism_v2.0.safetensors"
       ]
     },
     {
-      "id": 19,
-      "type": "VHS_VideoCombine",
+      "id": 14,
+      "type": "StreamingT2VLoaderVidXTendModel",
       "pos": [
-        3557,
-        78
-      ],
-      "size": [
-        315,
-        599
-      ],
-      "flags": {},
-      "order": 14,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 20
-        },
-        {
-          "name": "audio",
-          "type": "VHS_AUDIO",
-          "link": null
-        },
-        {
-          "name": "batch_manager",
-          "type": "VHS_BatchManager",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "Filenames",
-          "type": "VHS_FILENAMES",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "VHS_VideoCombine"
-      },
-      "widgets_values": {
-        "frame_rate": 25,
-        "loop_count": 0,
-        "filename_prefix": "AnimateDiff",
-        "format": "video/h264-mp4",
-        "pix_fmt": "yuv420p",
-        "crf": 19,
-        "save_metadata": true,
-        "pingpong": false,
-        "save_output": true,
-        "videopreview": {
-          "hidden": false,
-          "paused": false,
-          "params": {
-            "filename": "AnimateDiff_00039.mp4",
-            "subfolder": "",
-            "type": "output",
-            "format": "video/h264-mp4"
-          }
-        }
-      }
-    },
-    {
-      "id": 15,
-      "type": "StreamingT2VRunLongStepVidXTendPipeline",
-      "pos": [
-        1658,
-        204
+        102.81551484375129,
+        876.0633328353878
       ],
       "size": {
-        "0": 327.6000061035156,
-        "1": 222
+        "0": 315,
+        "1": 58
       },
       "flags": {},
-      "order": 9,
+      "order": 2,
       "mode": 0,
-      "inputs": [
+      "outputs": [
         {
           "name": "VidXTendPipeline",
           "type": "VidXTendPipeline",
-          "link": 13
-        },
-        {
-          "name": "short_video",
-          "type": "IMAGE",
-          "link": 14
-        }
-      ],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
           "links": [
-            16
+            13
           ],
           "shape": 3,
           "slot_index": 0
         }
       ],
       "properties": {
-        "Node name for S&R": "StreamingT2VRunLongStepVidXTendPipeline"
+        "Node name for S&R": "StreamingT2VLoaderVidXTendModel"
       },
       "widgets_values": [
-        "A girl smiling",
-        24,
-        50,
-        9,
-        1774,
-        "fixed",
-        "worst quality, normal quality, low quality, low res, blurry, text,watermark, logo, banner, extra digits, cropped,jpeg artifacts, signature, username, error,sketch ,duplicate, ugly, monochrome, horror, geometry, mutation, disgusting"
+        "cuda"
+      ]
+    },
+    {
+      "id": 16,
+      "type": "StreamingT2VLoaderEnhanceModel",
+      "pos": [
+        940.9382551757835,
+        868.7920571289058
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "msxl_model",
+          "type": "msxl_model",
+          "links": [
+            15
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "StreamingT2VLoaderEnhanceModel"
+      },
+      "widgets_values": [
+        "cuda"
       ]
     }
   ],
@@ -893,7 +893,41 @@
       "IMAGE"
     ]
   ],
-  "groups": [],
+  "groups": [
+    {
+      "title": "STAGE 1 (16x256x256 short video)",
+      "bounding": [
+        482,
+        122,
+        1371,
+        613
+      ],
+      "color": "#3f789e",
+      "font_size": 24
+    },
+    {
+      "title": "STAGE 2 (long 256x256 video)",
+      "bounding": [
+        93,
+        802,
+        739,
+        881
+      ],
+      "color": "#3f789e",
+      "font_size": 24
+    },
+    {
+      "title": "STAGE 3 (long enhanced video)",
+      "bounding": [
+        931,
+        795,
+        1504,
+        712
+      ],
+      "color": "#3f789e",
+      "font_size": 24
+    }
+  ],
   "config": {},
   "extra": {},
   "version": 0.4
