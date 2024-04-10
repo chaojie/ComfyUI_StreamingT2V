@@ -16,6 +16,10 @@ VidXTend (<10G VRAM) | Original (<15G VRAM)
 
 <img src="workflow/wf_VidXTend.png" raw=true>
 
+[Test prompt travel Workflow](https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/workflow/wf_prompttravel.json)
+
+<img src="workflow/wf_prompttravel.png" raw=true>
+
 <details> <summary>More Workflow</summary>
 
 ### Step 1 (It's not necessary.) Generate short video (16x256x256):

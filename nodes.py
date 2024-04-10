@@ -528,6 +528,88 @@ class StreamingT2VRunLongStepVidXTendPipeline:
         images = [torch.unsqueeze(torch.tensor(np.array(image).astype(np.float32) / 255.0), 0) for image in images]
         return torch.cat(tuple(images[:num_frames]), dim=0).unsqueeze(0)
 
+class StreamingT2VRunLongStepVidXTendPipelinePromptTravel:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "VidXTendPipeline": ("VidXTendPipeline",),
+                "short_video":("IMAGE",),
+                "prompt":("STRING",{"default":"", "multiline": True}),
+                "ref_frames":("IMAGE",),
+                "num_frames": ("INT", {"default": 24}),
+                "num_steps": ("INT", {"default": 50}),
+                "image_guidance": ("FLOAT", {"default": 9.0}),
+                "seed": ("INT", {"default": 33}),
+                "negative_prompt":("STRING",{"default":"worst quality, normal quality, low quality, low res, blurry, text,watermark, logo, banner, extra digits, cropped,jpeg artifacts, signature, username, error,sketch ,duplicate, ugly, monochrome, horror, geometry, mutation, disgusting"}),
+            },
+        }
+
+    RETURN_TYPES = ("IMAGE",)
+    FUNCTION = "run"
+    CATEGORY = "StreamingT2V"
+
+    def run(self,VidXTendPipeline,short_video,prompt,ref_frames,num_frames,num_steps,image_guidance,seed,negative_prompt):
+        import json
+        promptstr="{"+prompt+"}"
+        prompts={}
+        input_frames_conditionings={}
+        promptjson=json.loads(promptstr)
+ 
+        images = []
+        for image in short_video:
+            image = 255.0 * image.cpu().numpy()
+            image = Image.fromarray(np.clip(image, 0, 255).astype(np.uint8))
+            images.append(image)
+        
+        input_frames = []
+        for image in ref_frames:
+            image = 255.0 * image.cpu().numpy()
+            image = Image.fromarray(np.clip(image, 0, 255).astype(np.uint8))
+            input_frames.append(image)
+
+        ind=len(images)
+        preprompt=list(promptjson.values())[0]
+        preimage=input_frames[:1]
+        prompts[str(ind)]=preprompt
+        while ind < num_frames:
+            if str(ind) in list(promptjson.keys()):
+                prompts[str(ind)]=promptjson[str(ind)]
+            else:
+                prompts[str(ind)]=preprompt
+            preprompt=prompts[str(ind)]
+
+            if ind/8<len(input_frames):
+                input_frames_conditionings[str(ind)]=input_frames[int(ind/8)]
+            else:
+                input_frames_conditionings[str(ind)]=input_frames_conditionings[str(ind-8)]
+            ind+=8
+        #images=short_video.permute(0,3,1,2)
+        generator = torch.Generator(device="cuda")
+        generator.manual_seed(seed)
+        added_frames = len(images)
+        while added_frames < num_frames:
+            prompt=prompts[str(added_frames)]
+            result = VidXTendPipeline(
+                prompt=prompt,
+                #num_frames=num_frames,
+                num_inference_steps=num_steps,
+                negative_prompt=negative_prompt,
+                image=images[-8:], # Use final 8 frames of video
+                input_frames_conditioning=input_frames_conditionings[str(added_frames)], # Use first frame of video
+                eta=1.0,
+                guidance_scale=image_guidance,
+                generator=generator,
+                output_type="pil"
+            ) # Remove the first 8 frames from the output as they were used as guide for final 8
+            images.extend(result.frames[8:])
+            added_frames += 8
+            # Clear memory between iterations
+            torch.cuda.empty_cache()
+            gc.collect()
+        images = [torch.unsqueeze(torch.tensor(np.array(image).astype(np.float32) / 255.0), 0) for image in images]
+        return torch.cat(tuple(images[:num_frames]), dim=0).unsqueeze(0)
+
 class StreamingT2VRunLongStep:
     @classmethod
     def INPUT_TYPES(cls):
@@ -631,6 +713,7 @@ NODE_CLASS_MAPPINGS = {
     "StreamingT2VRunEnhanceStep":StreamingT2VRunEnhanceStep,
     "StreamingT2VLoaderVidXTendModel":StreamingT2VLoaderVidXTendModel,
     "StreamingT2VRunLongStepVidXTendPipeline":StreamingT2VRunLongStepVidXTendPipeline,
+    "StreamingT2VRunLongStepVidXTendPipelinePromptTravel":StreamingT2VRunLongStepVidXTendPipelinePromptTravel,
     "VHS_FILENAMES_STRING_StreamingT2V":VHS_FILENAMES_STRING_StreamingT2V
 }
 
