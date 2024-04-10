@@ -497,7 +497,7 @@ class StreamingT2VRunLongStepVidXTendPipeline:
     FUNCTION = "run"
     CATEGORY = "StreamingT2V"
 
-    def run(self,VidXTendPipeline,short_video,prompt,num_frames,num_steps,image_guidance,seed):
+    def run(self,VidXTendPipeline,short_video,prompt,num_frames,num_steps,image_guidance,seed,negative_prompt):
         images = []
         for image in short_video:
             image = 255.0 * image.cpu().numpy()
