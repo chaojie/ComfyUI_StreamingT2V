@@ -371,6 +371,8 @@ class StreamingT2VLoaderVidXTendModel:
             torch_dtype=torch.float16,
             variant="fp16",
         )
+        pipeline.enable_model_cpu_offload()
+        pipeline.enable_vae_slicing()
         pipeline.set_use_memory_efficient_attention_xformers()
         pipeline.to(device, dtype=torch.float16)
 
@@ -481,6 +483,7 @@ class StreamingT2VRunLongStepVidXTendPipeline:
                 "num_steps": ("INT", {"default": 50}),
                 "image_guidance": ("FLOAT", {"default": 9.0}),
                 "seed": ("INT", {"default": 33}),
+                "negative_prompt":("STRING",{"default":"worst quality, normal quality, low quality, low res, blurry, text,watermark, logo, banner, extra digits, cropped,jpeg artifacts, signature, username, error,sketch ,duplicate, ugly, monochrome, horror, geometry, mutation, disgusting"}),
             },
         }
 
@@ -502,7 +505,8 @@ class StreamingT2VRunLongStepVidXTendPipeline:
             result = VidXTendPipeline(
                 prompt=prompt,
                 #num_frames=num_frames,
-                negative_prompt=None, # Optionally use negative prompt
+                num_inference_steps=num_steps,
+                negative_prompt=negative_prompt,
                 image=images[-8:], # Use final 8 frames of video
                 input_frames_conditioning=images[:1], # Use first frame of video
                 eta=1.0,
@@ -584,6 +588,21 @@ class StreamingT2VRunEnhanceStep:
             ret=video2video(prompt, low_video_path, result_fol, cfg_v2v, msxl_model)
         return (ret,)
 
+class VHS_FILENAMES_STRING_StreamingT2V:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+                "required": {
+                    "filenames": ("VHS_FILENAMES",),
+                    }
+                }
+
+    RETURN_TYPES = ("STRING",)
+    CATEGORY = "MuseV"
+    FUNCTION = "run"
+
+    def run(self, filenames):
+        return (filenames[1][-1],)
 
 NODE_CLASS_MAPPINGS = {
     "StreamingT2VLoaderModelscopeT2V":StreamingT2VLoaderModelscopeT2V,
@@ -603,6 +622,7 @@ NODE_CLASS_MAPPINGS = {
     "StreamingT2VRunEnhanceStep":StreamingT2VRunEnhanceStep,
     "StreamingT2VLoaderVidXTendModel":StreamingT2VLoaderVidXTendModel,
     "StreamingT2VRunLongStepVidXTendPipeline":StreamingT2VRunLongStepVidXTendPipeline,
+    "VHS_FILENAMES_STRING_StreamingT2V":VHS_FILENAMES_STRING_StreamingT2V
 }
 
 import logging
