@@ -7,9 +7,9 @@ from pathlib import Path
 import torch
 import tempfile
 import yaml
-from .model.video_ldm import VideoLDM
+#from .model.video_ldm import VideoLDM
 from typing import List, Optional
-from .model.callbacks import SaveConfigCallback
+#from .model.callbacks import SaveConfigCallback
 from PIL.Image import Image, fromarray
 
 from einops import rearrange, repeat
@@ -22,16 +22,11 @@ import sys
 sys.path.insert(0,f'{comfy_path}/custom_nodes/ComfyUI_StreamingT2V/thirdparty')
 sys.path.insert(0,f'{comfy_path}/custom_nodes/ComfyUI_StreamingT2V')
 
-from modelscope.pipelines import pipeline
-from modelscope.outputs import OutputKeys
+#from modelscope.pipelines import pipeline
+#from modelscope.outputs import OutputKeys
 import imageio
 import pathlib
 import numpy as np
-
-# Utilities
-from .inference_utils import *
-from .model_init import *
-from .model_func import *
 
 class StreamingT2VLoaderModelscopeT2V:
     @classmethod
@@ -49,6 +44,9 @@ class StreamingT2VLoaderModelscopeT2V:
     CATEGORY = "StreamingT2V"
 
     def run(self,ckpt_name,device,vram_not_enough):
+        # Utilities
+        from .model_init import init_streamingt2v_model,init_modelscope,init_animatediff,init_sdxl,init_v2v_model
+
         sdxl_model=None
         base_model="ModelscopeT2V"
         result_fol = folder_paths.get_output_directory()
@@ -82,6 +80,9 @@ class StreamingT2VLoaderAnimateDiff:
     CATEGORY = "StreamingT2V"
 
     def run(self,ckpt_name,device,vram_not_enough):
+        # Utilities
+        from .model_init import init_streamingt2v_model,init_modelscope,init_animatediff,init_sdxl,init_v2v_model
+        
         sdxl_model=None
         base_model="AnimateDiff"
         result_fol = folder_paths.get_output_directory()
@@ -115,6 +116,9 @@ class StreamingT2VLoaderSVD:
     CATEGORY = "StreamingT2V"
 
     def run(self,ckpt_name,device,vram_not_enough):
+        # Utilities
+        from .model_init import init_streamingt2v_model,init_modelscope,init_animatediff,init_sdxl,init_v2v_model
+        
         sdxl_model=None
         base_model="SVD"
         result_fol = folder_paths.get_output_directory()
@@ -166,6 +170,9 @@ class StreamingT2VRunT2V:
     CATEGORY = "StreamingT2V"
 
     def run(self,StreamingT2VModel,prompt,negative_prompt,num_frames,num_steps,image_guidance,seed,chunk,overlap,upscale_width,upscale_height,upscale_pad):
+        # Utilities
+        from .model_func import ms_short_gen,ad_short_gen,svd_short_gen,stream_long_gen,video2video_randomized,video2video
+
         result_fol = folder_paths.get_output_directory()
         model,sdxl_model,msxl_model,base_model,stream_cli, stream_model=StreamingT2VModel
         
@@ -224,8 +231,11 @@ class StreamingT2VRunI2V:
     CATEGORY = "StreamingT2V"
 
     def run(self,StreamingT2VModelSVD,image,prompt,negative_prompt,num_frames,num_steps,image_guidance,seed,chunk,overlap,upscale_width,upscale_height,upscale_pad):
+        # Utilities
+        from .model_func import ms_short_gen,ad_short_gen,svd_short_gen,stream_long_gen,video2video_randomized,video2video
+
         image = 255.0 * image[0].cpu().numpy()
-        image = Image.fromarray(np.clip(image, 0, 255).astype(np.uint8))
+        image = fromarray(np.clip(image, 0, 255).astype(np.uint8))
         input_fol = folder_paths.get_input_directory()
         image_path=f'{input_fol}/i2v.png'
         image.save(image_path)
@@ -275,6 +285,9 @@ class StreamingT2VLoaderModelscopeModel:
     CATEGORY = "StreamingT2V"
 
     def run(self,device):
+        # Utilities
+        from .model_init import init_modelscope
+
         model = init_modelscope(device)
         return (model,)
 
@@ -292,6 +305,9 @@ class StreamingT2VLoaderAnimateDiffModel:
     CATEGORY = "StreamingT2V"
 
     def run(self,device):
+        # Utilities
+        from .model_init import init_animatediff
+
         model = init_animatediff(device)
         return (model,)
 
@@ -309,6 +325,9 @@ class StreamingT2VLoaderSVDModel:
     CATEGORY = "StreamingT2V"
 
     def run(self,device):
+        # Utilities
+        from .model_init import init_svd
+
         model = init_svd(device)
         return (model,)
 
@@ -326,6 +345,9 @@ class StreamingT2VLoaderEnhanceModel:
     CATEGORY = "StreamingT2V"
 
     def run(self,device):
+        # Utilities
+        from .model_init import init_v2v_model
+
         cfg_v2v = {'downscale': 1, 'upscale_size': (1280, 720), 'model_id': 'damo/Video-to-Video', 'pad': True}
         msxl_model = init_v2v_model(cfg_v2v,device)
         return (msxl_model,)
@@ -345,6 +367,9 @@ class StreamingT2VLoaderStreamModel:
     CATEGORY = "StreamingT2V"
 
     def run(self,ckpt_name,device):
+        # Utilities
+        from .model_init import init_streamingt2v_model
+
         vram_not_enough=False
         if device=="cpu":
             vram_not_enough=True
@@ -402,6 +427,9 @@ class StreamingT2VRunShortStepModelscopeT2V:
     CATEGORY = "StreamingT2V"
 
     def run(self,model,prompt,seed):
+        # Utilities
+        from .model_func import ms_short_gen
+
         inference_generator = torch.Generator(device="cuda")
 
         inference_generator = torch.Generator(device="cuda")
@@ -430,6 +458,9 @@ class StreamingT2VRunShortStepAnimateDiff:
     CATEGORY = "StreamingT2V"
 
     def run(self,model,prompt,seed):
+        # Utilities
+        from .model_func import ad_short_gen
+
         inference_generator = torch.Generator(device="cuda")
 
         inference_generator = torch.Generator(device="cuda")
@@ -460,8 +491,11 @@ class StreamingT2VRunShortStepSVD:
     CATEGORY = "StreamingT2V"
 
     def run(self,model,image,prompt,seed):
+        # Utilities
+        from .model_func import svd_short_gen
+
         image = 255.0 * image[0].cpu().numpy()
-        image = Image.fromarray(np.clip(image, 0, 255).astype(np.uint8))
+        image = fromarray(np.clip(image, 0, 255).astype(np.uint8))
         input_fol = folder_paths.get_input_directory()
         image_path=f'{input_fol}/i2v.png'
         image.save(image_path)
@@ -501,7 +535,7 @@ class StreamingT2VRunLongStepVidXTendPipeline:
         images = []
         for image in short_video:
             image = 255.0 * image.cpu().numpy()
-            image = Image.fromarray(np.clip(image, 0, 255).astype(np.uint8))
+            image = fromarray(np.clip(image, 0, 255).astype(np.uint8))
             images.append(image)
         #images=short_video.permute(0,3,1,2)
         generator = torch.Generator(device="cuda")
@@ -559,13 +593,13 @@ class StreamingT2VRunLongStepVidXTendPipelinePromptTravel:
         images = []
         for image in short_video:
             image = 255.0 * image.cpu().numpy()
-            image = Image.fromarray(np.clip(image, 0, 255).astype(np.uint8))
+            image = fromarray(np.clip(image, 0, 255).astype(np.uint8))
             images.append(image)
         
         input_frames = []
         for image in ref_frames:
             image = 255.0 * image.cpu().numpy()
-            image = Image.fromarray(np.clip(image, 0, 255).astype(np.uint8))
+            image = fromarray(np.clip(image, 0, 255).astype(np.uint8))
             input_frames.append(image)
 
         ind=len(images)
@@ -633,6 +667,9 @@ class StreamingT2VRunLongStep:
     CATEGORY = "StreamingT2V"
 
     def run(self,stream_cli, stream_model,short_video,prompt,num_frames,num_steps,image_guidance,seed):
+        # Utilities
+        from .model_func import stream_long_gen
+
         short_video=short_video.permute(0,3,1,2)
         print(f'{short_video.shape}')
 
@@ -669,6 +706,9 @@ class StreamingT2VRunEnhanceStep:
     CATEGORY = "StreamingT2V"
 
     def run(self,msxl_model,low_video_path,prompt,num_frames,chunk,overlap,upscale_width,upscale_height,upscale_pad):
+        # Utilities
+        from .model_func import video2video_randomized,video2video
+        
         result_fol = folder_paths.get_output_directory()
 
         cfg_v2v = {'downscale': 1, 'upscale_size': (upscale_width,upscale_height), 'model_id': 'damo/Video-to-Video', 'pad': upscale_pad}
@@ -717,8 +757,8 @@ NODE_CLASS_MAPPINGS = {
     "VHS_FILENAMES_STRING_StreamingT2V":VHS_FILENAMES_STRING_StreamingT2V
 }
 
-import logging
-logging_level = logging.INFO
+#import logging
+#logging_level = logging.INFO
 
-logging.basicConfig(format="%(message)s", level=logging_level)
-logging.getLogger().addHandler(logging.StreamHandler(sys.stdout))
+#logging.basicConfig(format="%(message)s", level=logging_level)
+#logging.getLogger().addHandler(logging.StreamHandler(sys.stdout))
