@@ -12,52 +12,52 @@ VidXTend (<10G VRAM) | Original (<15G VRAM)
 
 You can freely generate a 16x256x256 video without using the process below. You can even use videos downloaded from the internet.
 
-AnimateDiff Option: https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/wf_short_ad.json
+AnimateDiff Option: https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/workflow/wf_short_ad.json
 
-<img src="wf_short_ad.png" raw=true>
+<img src="workflow/wf_short_ad.png" raw=true>
 
-Modelscope Option: https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/wf_short_ms.json
+Modelscope Option: https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/workflow/wf_short_ms.json
 
-<img src="wf_short_ms.png" raw=true>
+<img src="workflow/wf_short_ms.png" raw=true>
 
-SVD Option: https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/wf_short_svd.json
+SVD Option: https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/workflow/wf_short_svd.json
 
-<img src="wf_short_svd.png" raw=true>
+<img src="workflow/wf_short_svd.png" raw=true>
 
 ### Step 2 Generate long video (nx256x256):
 
-VidXTend Option: https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/wf_VidXTend.json
+VidXTend Option: https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/workflow/wf_VidXTend.json
 
-<img src="wf_VidXTend.png" raw=true>
+<img src="workflow/wf_VidXTend.png" raw=true>
 
-Original Option: https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/wf_long.json
+Original Option: https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/workflow/wf_long.json
 
-<img src="wf_long.png" raw=true>
+<img src="workflow/wf_long.png" raw=true>
 
 ### Step 3 Generate long enhanced video (nx512x512):
 
-https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/wf_enhance.json
+https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/workflow/wf_enhance.json
 
-<img src="wf_enhance.png" raw=true>
+<img src="workflow/wf_enhance.png" raw=true>
 
 ### You can generate all by one workflow (MORE VRAM)
 
 ModelscopeT2V (T2V)
 
-https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/wf.json
+https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/workflow/wf.json
 
-<img src="wf.png" raw=true>
+<img src="workflow/wf.png" raw=true>
 
 AnimateDiff (T2V)
 
-https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/wf_ad.json
+https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/workflow/wf_ad.json
 
-<img src="wf_ad.png" raw=true>
+<img src="workflow/wf_ad.png" raw=true>
 
 SVD (I2V)
 
-https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/wf_svd.json
+https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/workflow/wf_svd.json
 
-<img src="wf_svd.png" raw=true>
+<img src="workflow/wf_svd.png" raw=true>
 
 ## [StreamingT2V](https://github.com/Picsart-AI-Research/StreamingT2V)

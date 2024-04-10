@@ -1,66 +1,26 @@
 {
-  "last_node_id": 16,
-  "last_link_id": 13,
+  "last_node_id": 9,
+  "last_link_id": 9,
   "nodes": [
     {
-      "id": 14,
-      "type": "StreamingT2VLoaderEnhanceModel",
+      "id": 4,
+      "type": "VHS_LoadVideo",
       "pos": [
-        596,
-        -107
-      ],
-      "size": {
-        "0": 315,
-        "1": 58
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "msxl_model",
-          "type": "msxl_model",
-          "links": [
-            11
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "StreamingT2VLoaderEnhanceModel"
-      },
-      "widgets_values": [
-        "cuda"
-      ]
-    },
-    {
-      "id": 3,
-      "type": "VHS_LoadVideoPath",
-      "pos": [
-        1417,
-        -61
+        297,
+        424
       ],
       "size": [
-        317.4000244140625,
-        214
+        235.1999969482422,
+        491.1999969482422
       ],
       "flags": {},
-      "order": 3,
+      "order": 0,
       "mode": 0,
       "inputs": [
         {
           "name": "batch_manager",
           "type": "VHS_BatchManager",
           "link": null
-        },
-        {
-          "name": "video",
-          "type": "STRING",
-          "link": 12,
-          "widget": {
-            "name": "video"
-          }
         }
       ],
       "outputs": [
@@ -68,7 +28,7 @@
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            3
+            5
           ],
           "shape": 3,
           "slot_index": 0
@@ -93,10 +53,10 @@
         }
       ],
       "properties": {
-        "Node name for S&R": "VHS_LoadVideoPath"
+        "Node name for S&R": "VHS_LoadVideo"
       },
       "widgets_values": {
-        "video": "X://insert/path/here.mp4",
+        "video": "AnimateDiff_00020 (1).mp4",
         "force_rate": 0,
         "force_size": "Disabled",
         "custom_width": 512,
@@ -104,6 +64,7 @@
         "frame_load_cap": 0,
         "skip_first_frames": 0,
         "select_every_nth": 1,
+        "choose video to upload": "image",
         "videopreview": {
           "hidden": false,
           "paused": false,
@@ -111,8 +72,8 @@
             "frame_load_cap": 0,
             "skip_first_frames": 0,
             "force_rate": 0,
-            "filename": "X://insert/path/here.mp4",
-            "type": "path",
+            "filename": "AnimateDiff_00020 (1).mp4",
+            "type": "input",
             "format": "video/mp4",
             "select_every_nth": 1
           }
@@ -120,65 +81,14 @@
       }
     },
     {
-      "id": 15,
-      "type": "StreamingT2VRunEnhanceStep",
+      "id": 1,
+      "type": "StreamingT2VLoaderVidXTendModel",
       "pos": [
-        1001,
-        -87
-      ],
-      "size": [
-        315,
-        154
-      ],
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "msxl_model",
-          "type": "msxl_model",
-          "link": 11
-        },
-        {
-          "name": "low_video_path",
-          "type": "STRING",
-          "link": 13,
-          "widget": {
-            "name": "low_video_path"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "video_path",
-          "type": "STRING",
-          "links": [
-            12
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "StreamingT2VRunEnhanceStep"
-      },
-      "widgets_values": [
-        "/home/admin/ComfyUI/output/A_cat_running_on_the_street_23_14_22_074893.mp4",
-        "A cat running on the street",
-        24,
-        56,
-        32
-      ]
-    },
-    {
-      "id": 16,
-      "type": "PrimitiveNode",
-      "pos": [
-        575,
-        44
+        288,
+        265
       ],
       "size": {
-        "0": 210,
+        "0": 315,
         "1": 58
       },
       "flags": {},
@@ -186,43 +96,91 @@
       "mode": 0,
       "outputs": [
         {
-          "name": "STRING",
-          "type": "STRING",
+          "name": "VidXTendPipeline",
+          "type": "VidXTendPipeline",
           "links": [
-            13
+            4
           ],
-          "slot_index": 0,
-          "widget": {
-            "name": "low_video_path"
-          }
+          "shape": 3,
+          "slot_index": 0
         }
       ],
       "properties": {
-        "Run widget replace on values": false
+        "Node name for S&R": "StreamingT2VLoaderVidXTendModel"
       },
       "widgets_values": [
-        "/home/admin/ComfyUI/output/A_cat_running_on_the_street_23_14_22_074893.mp4"
+        "cuda"
       ]
     },
     {
-      "id": 4,
+      "id": 6,
+      "type": "StreamingT2VRunLongStepVidXTendPipeline",
+      "pos": [
+        830,
+        269
+      ],
+      "size": {
+        "0": 327.6000061035156,
+        "1": 222
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "VidXTendPipeline",
+          "type": "VidXTendPipeline",
+          "link": 4
+        },
+        {
+          "name": "short_video",
+          "type": "IMAGE",
+          "link": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            9
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "StreamingT2VRunLongStepVidXTendPipeline"
+      },
+      "widgets_values": [
+        "1girl running",
+        24,
+        50,
+        9,
+        2037,
+        "fixed",
+        "worst quality, normal quality, low quality, low res, blurry, text,watermark, logo, banner, extra digits, cropped,jpeg artifacts, signature, username, error,sketch ,duplicate, ugly, monochrome, horror, geometry, mutation, disgusting"
+      ]
+    },
+    {
+      "id": 9,
       "type": "VHS_VideoCombine",
       "pos": [
-        1857,
-        -65
+        1334.0003967285156,
+        260.99993896484375
       ],
-      "size": [
-        315,
-        599
-      ],
+      "size": {
+        "0": 315,
+        "1": 290
+      },
       "flags": {},
-      "order": 4,
+      "order": 3,
       "mode": 0,
       "inputs": [
         {
           "name": "images",
           "type": "IMAGE",
-          "link": 3
+          "link": 9
         },
         {
           "name": "audio",
@@ -259,48 +217,35 @@
         "videopreview": {
           "hidden": false,
           "paused": false,
-          "params": {
-            "filename": "AnimateDiff_00019.mp4",
-            "subfolder": "",
-            "type": "output",
-            "format": "video/h264-mp4"
-          }
+          "params": {}
         }
       }
     }
   ],
   "links": [
     [
-      3,
-      3,
+      4,
+      1,
       0,
+      6,
+      0,
+      "VidXTendPipeline"
+    ],
+    [
+      5,
       4,
       0,
+      6,
+      1,
       "IMAGE"
     ],
     [
-      11,
-      14,
+      9,
+      6,
       0,
-      15,
+      9,
       0,
-      "msxl_model"
-    ],
-    [
-      12,
-      15,
-      0,
-      3,
-      1,
-      "STRING"
-    ],
-    [
-      13,
-      16,
-      0,
-      15,
-      1,
-      "STRING"
+      "IMAGE"
     ]
   ],
   "groups": [],

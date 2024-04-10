@@ -153,6 +153,9 @@ class StreamingT2VRunT2V:
                 "seed": ("INT", {"default": 33}),
                 "chunk": ("INT", {"default": 56}),
                 "overlap": ("INT", {"default": 32}),
+                "upscale_width": ("INT", {"default": 1280}),
+                "upscale_height": ("INT", {"default": 720}),
+                "upscale_pad": ("BOOLEAN", {"default": True}),
             },
         }
 
@@ -162,7 +165,7 @@ class StreamingT2VRunT2V:
     OUTPUT_NODE = True
     CATEGORY = "StreamingT2V"
 
-    def run(self,StreamingT2VModel,prompt,negative_prompt,num_frames,num_steps,image_guidance,seed,chunk,overlap):
+    def run(self,StreamingT2VModel,prompt,negative_prompt,num_frames,num_steps,image_guidance,seed,chunk,overlap,upscale_width,upscale_height,upscale_pad):
         result_fol = folder_paths.get_output_directory()
         model,sdxl_model,msxl_model,base_model,stream_cli, stream_model=StreamingT2VModel
         
@@ -184,7 +187,7 @@ class StreamingT2VRunT2V:
         n_autoreg_gen = (num_frames-8)//8
         stream_long_gen(prompt, short_video, n_autoreg_gen, seed, num_steps, image_guidance, name, stream_cli, stream_model)
 
-        cfg_v2v = {'downscale': 1, 'upscale_size': (1280, 720), 'model_id': 'damo/Video-to-Video', 'pad': True}
+        cfg_v2v = {'downscale': 1, 'upscale_size': (upscale_width,upscale_height), 'model_id': 'damo/Video-to-Video', 'pad': upscale_pad}
         ret=f'{result_fol}/{name}.mp4'
         if num_frames > 80:
             ret=video2video_randomized(prompt, opj(result_fol, name+".mp4"), result_fol, cfg_v2v, msxl_model, chunk_size=chunk, overlap_size=overlap)
@@ -208,6 +211,9 @@ class StreamingT2VRunI2V:
                 "seed": ("INT", {"default": 33}),
                 "chunk": ("INT", {"default": 56}),
                 "overlap": ("INT", {"default": 32}),
+                "upscale_width": ("INT", {"default": 1280}),
+                "upscale_height": ("INT", {"default": 720}),
+                "upscale_pad": ("BOOLEAN", {"default": True}),
             },
         }
 
@@ -217,7 +223,7 @@ class StreamingT2VRunI2V:
     OUTPUT_NODE = True
     CATEGORY = "StreamingT2V"
 
-    def run(self,StreamingT2VModelSVD,image,prompt,negative_prompt,num_frames,num_steps,image_guidance,seed,chunk,overlap):
+    def run(self,StreamingT2VModelSVD,image,prompt,negative_prompt,num_frames,num_steps,image_guidance,seed,chunk,overlap,upscale_width,upscale_height,upscale_pad):
         image = 255.0 * image[0].cpu().numpy()
         image = Image.fromarray(np.clip(image, 0, 255).astype(np.uint8))
         input_fol = folder_paths.get_input_directory()
@@ -246,7 +252,7 @@ class StreamingT2VRunI2V:
         n_autoreg_gen = (num_frames-8)//8
         stream_long_gen(prompt, short_video, n_autoreg_gen, seed, num_steps, image_guidance, name, stream_cli, stream_model)
 
-        cfg_v2v = {'downscale': 1, 'upscale_size': (1280, 720), 'model_id': 'damo/Video-to-Video', 'pad': True}
+        cfg_v2v = {'downscale': 1, 'upscale_size': (upscale_width,upscale_height), 'model_id': 'damo/Video-to-Video', 'pad': upscale_pad}
         ret=f'{result_fol}/{name}.mp4'
         if num_frames > 80:
             ret=video2video_randomized(prompt, opj(result_fol, name+".mp4"), result_fol, cfg_v2v, msxl_model, chunk_size=chunk, overlap_size=overlap)
@@ -568,6 +574,9 @@ class StreamingT2VRunEnhanceStep:
                 "num_frames": ("INT", {"default": 24}),
                 "chunk": ("INT", {"default": 56}),
                 "overlap": ("INT", {"default": 32}),
+                "upscale_width": ("INT", {"default": 1280}),
+                "upscale_height": ("INT", {"default": 720}),
+                "upscale_pad": ("BOOLEAN", {"default": True}),
             },
         }
 
@@ -577,10 +586,10 @@ class StreamingT2VRunEnhanceStep:
     OUTPUT_NODE = True
     CATEGORY = "StreamingT2V"
 
-    def run(self,msxl_model,low_video_path,prompt,num_frames,chunk,overlap):
+    def run(self,msxl_model,low_video_path,prompt,num_frames,chunk,overlap,upscale_width,upscale_height,upscale_pad):
         result_fol = folder_paths.get_output_directory()
 
-        cfg_v2v = {'downscale': 1, 'upscale_size': (1280, 720), 'model_id': 'damo/Video-to-Video', 'pad': True}
+        cfg_v2v = {'downscale': 1, 'upscale_size': (upscale_width,upscale_height), 'model_id': 'damo/Video-to-Video', 'pad': upscale_pad}
         ret=f''
         if num_frames > 80:
             ret=video2video_randomized(prompt, low_video_path, result_fol, cfg_v2v, msxl_model, chunk_size=chunk, overlap_size=overlap)
