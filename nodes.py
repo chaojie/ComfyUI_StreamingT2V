@@ -616,7 +616,8 @@ class StreamingT2VRunLongStepVidXTendPipelinePromptTravel:
             if ind/8<len(input_frames):
                 input_frames_conditionings[str(ind)]=input_frames[int(ind/8)]
             else:
-                input_frames_conditionings[str(ind)]=input_frames_conditionings[str(ind-8)]
+                input_frames_conditionings[str(ind)]=preimage
+            preimage=input_frames_conditionings[str(ind)]
             ind+=8
         #images=short_video.permute(0,3,1,2)
         generator = torch.Generator(device="cuda")
