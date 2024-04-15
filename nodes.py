@@ -874,13 +874,15 @@ class PromptTravelIndex:
         promptjson=json.loads(promptstr)
 
         keys=list(promptjson.keys())
+        ret=''
         if index<=int(keys[len(keys)-1]):
             for ind in range(len(keys)):
                 if index>=int(keys[ind]):
-                    return (list(promptjson.values())[ind],)
+                    ret=list(promptjson.values())[ind]
 
         else:
-            return (list(promptjson.values())[len(keys)-1],)
+            ret=list(promptjson.values())[len(keys)-1]
+        return (ret,)
 
 def get_allowed_dirs():
     dir = os.path.abspath(os.path.join(__file__, ".."))
