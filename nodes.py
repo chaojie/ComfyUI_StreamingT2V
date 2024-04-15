@@ -621,6 +621,65 @@ class StreamingT2VRunLongStepVidXTendPipelineCustomRef:
         images = [torch.unsqueeze(torch.tensor(np.array(image).astype(np.float32) / 255.0), 0) for image in images]
         return torch.cat(tuple(images[:num_frames]), dim=0).unsqueeze(0)
 
+class StreamingT2VRunLongStepVidXTendPipelineCustomRefOutExtendOnly:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "VidXTendPipeline": ("VidXTendPipeline",),
+                "short_video":("IMAGE",),
+                "prompt":("STRING",{"default":"A cat running on the street"}),
+                "ref_frames":("IMAGE",),
+                "num_frames": ("INT", {"default": 24}),
+                "num_steps": ("INT", {"default": 50}),
+                "image_guidance": ("FLOAT", {"default": 9.0}),
+                "seed": ("INT", {"default": 33}),
+                "negative_prompt":("STRING",{"default":"worst quality, normal quality, low quality, low res, blurry, text,watermark, logo, banner, extra digits, cropped,jpeg artifacts, signature, username, error,sketch ,duplicate, ugly, monochrome, horror, geometry, mutation, disgusting"}),
+            },
+        }
+
+    RETURN_TYPES = ("IMAGE",)
+    FUNCTION = "run"
+    CATEGORY = "StreamingT2V"
+
+    def run(self,VidXTendPipeline,short_video,prompt,ref_frames,num_frames,num_steps,image_guidance,seed,negative_prompt):
+        images = []
+        for image in short_video:
+            image = 255.0 * image.cpu().numpy()
+            image = fromarray(np.clip(image, 0, 255).astype(np.uint8))
+            images.append(image)
+        
+        refimages = []
+        for image in ref_frames:
+            image = 255.0 * image.cpu().numpy()
+            image = fromarray(np.clip(image, 0, 255).astype(np.uint8))
+            refimages.append(image)
+
+        #images=short_video.permute(0,3,1,2)
+        generator = torch.Generator(device="cuda")
+        generator.manual_seed(seed)
+        added_frames = len(images)
+        while added_frames < num_frames:
+            result = VidXTendPipeline(
+                prompt=prompt,
+                #num_frames=num_frames,
+                num_inference_steps=num_steps,
+                negative_prompt=negative_prompt,
+                image=images, # Use final 8 frames of video
+                input_frames_conditioning=refimages, # Use first frame of video
+                eta=1.0,
+                guidance_scale=image_guidance,
+                generator=generator,
+                output_type="pil"
+            ) # Remove the first 8 frames from the output as they were used as guide for final 8
+            images.extend(result.frames[8:])
+            added_frames += 8
+            # Clear memory between iterations
+            torch.cuda.empty_cache()
+            gc.collect()
+        images = [torch.unsqueeze(torch.tensor(np.array(image).astype(np.float32) / 255.0), 0) for image in images]
+        return torch.cat(tuple(images[:num_frames]), dim=0).unsqueeze(0)
+
 class StreamingT2VRunLongStepVidXTendPipelinePromptTravel:
     @classmethod
     def INPUT_TYPES(cls):
@@ -789,11 +848,140 @@ class VHS_FILENAMES_STRING_StreamingT2V:
                 }
 
     RETURN_TYPES = ("STRING",)
-    CATEGORY = "MuseV"
+    CATEGORY = "StreamingT2V"
     FUNCTION = "run"
 
     def run(self, filenames):
         return (filenames[1][-1],)
+
+class PromptTravelIndex:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "prompt":("STRING",{"default":""}),
+                "index": ("INT", {"default": 0}),
+            }
+        }
+
+    RETURN_TYPES = ("STRING",)
+    CATEGORY = "StreamingT2V"
+    FUNCTION = "run"
+
+    def run(self, prompt, index):
+        import json
+        promptstr="{"+prompt+"}"
+        promptjson=json.loads(promptstr)
+
+        keys=list(promptjson.keys())
+        if index<=int(keys[len(keys)-1]):
+            for ind in range(len(keys)):
+                if index>=int(keys[ind]):
+                    return (list(promptjson.values())[ind],)
+
+        else:
+            return (list(promptjson.values())[len(keys)-1],)
+
+def get_allowed_dirs():
+    dir = os.path.abspath(os.path.join(__file__, ".."))
+    file = os.path.join(dir, "text_file_dirs.json")
+    with open(file, "r") as f:
+        return json.loads(f.read())
+
+
+def get_valid_dirs():
+    return get_allowed_dirs().keys()
+
+def get_dir_from_name(name):
+    dirs = get_allowed_dirs()
+    if name not in dirs:
+        raise KeyError(name + " dir not found")
+
+    path = dirs[name]
+    path = path.replace("$input", folder_paths.get_input_directory())
+    path = path.replace("$output", folder_paths.get_output_directory())
+    path = path.replace("$temp", folder_paths.get_temp_directory())
+    return path
+
+
+def is_child_dir(parent_path, child_path):
+    parent_path = os.path.abspath(parent_path)
+    child_path = os.path.abspath(child_path)
+    return os.path.commonpath([parent_path]) == os.path.commonpath([parent_path, child_path])
+
+
+def get_real_path(dir):
+    dir = dir.replace("/**/", "/")
+    dir = os.path.abspath(dir)
+    dir = os.path.split(dir)[0]
+    return dir
+
+def get_file(root_dir, file):
+    if file == "[none]" or not file or not file.strip():
+        raise ValueError("No file")
+
+    root_dir = get_dir_from_name(root_dir)
+    root_dir = get_real_path(root_dir)
+    if not os.path.exists(root_dir):
+        os.mkdir(root_dir)
+    full_path = os.path.join(root_dir, file)
+
+    #if not is_child_dir(root_dir, full_path):
+    #    raise ReferenceError()
+
+    return full_path
+
+class TextFileNode:
+    RETURN_TYPES = ("STRING","BOOLEAN",)
+    CATEGORY = "utils"
+
+    def load_text(self, **kwargs):
+        self.file = get_file(kwargs["root_dir"], kwargs["file"])
+        if not os.path.exists(self.file):
+            return ("",False,)
+        with open(self.file, "r") as f:
+            return (f.read(),True, )
+
+
+class LoadText_StreamingT2V(TextFileNode):
+    @classmethod
+    def IS_CHANGED(self, **kwargs):
+        return os.path.getmtime(self.file)
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "root_dir": (list(get_valid_dirs()), {"default":"output"}),
+                "file": ("STRING", {"default": "dragtest_1.txt"}),
+            },
+        }
+
+    FUNCTION = "load_text"
+
+class SaveText_StreamingT2V(TextFileNode):
+    @classmethod
+    def IS_CHANGED(self, **kwargs):
+        return float("nan")
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "root_dir": (list(get_valid_dirs()), {"default":"output"}),
+                "file": ("STRING", {"default": "dragtest_1.txt"}),
+                "text": ("STRING", {"forceInput": True, "multiline": True})
+            },
+        }
+
+    FUNCTION = "write_text"
+
+    def write_text(self, **kwargs):
+        self.file = get_file(kwargs["root_dir"], kwargs["file"])
+        with open(self.file, "w") as f:
+            f.write(kwargs["text"])
+
+        return super().load_text(**kwargs)
 
 NODE_CLASS_MAPPINGS = {
     "StreamingT2VLoaderModelscopeT2V":StreamingT2VLoaderModelscopeT2V,
@@ -814,8 +1002,12 @@ NODE_CLASS_MAPPINGS = {
     "StreamingT2VLoaderVidXTendModel":StreamingT2VLoaderVidXTendModel,
     "StreamingT2VRunLongStepVidXTendPipeline":StreamingT2VRunLongStepVidXTendPipeline,
     "StreamingT2VRunLongStepVidXTendPipelineCustomRef":StreamingT2VRunLongStepVidXTendPipelineCustomRef,
+    "StreamingT2VRunLongStepVidXTendPipelineCustomRefOutExtendOnly":StreamingT2VRunLongStepVidXTendPipelineCustomRefOutExtendOnly,
     "StreamingT2VRunLongStepVidXTendPipelinePromptTravel":StreamingT2VRunLongStepVidXTendPipelinePromptTravel,
-    "VHS_FILENAMES_STRING_StreamingT2V":VHS_FILENAMES_STRING_StreamingT2V
+    "VHS_FILENAMES_STRING_StreamingT2V":VHS_FILENAMES_STRING_StreamingT2V,
+    "PromptTravelIndex":PromptTravelIndex,
+    "LoadText_StreamingT2V":LoadText_StreamingT2V,
+    "SaveText_StreamingT2V":SaveText_StreamingT2V,
 }
 
 #import logging
