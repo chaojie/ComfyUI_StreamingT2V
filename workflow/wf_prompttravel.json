@@ -1,6 +1,6 @@
 {
-  "last_node_id": 130,
-  "last_link_id": 141,
+  "last_node_id": 132,
+  "last_link_id": 144,
   "nodes": [
     {
       "id": 14,
@@ -14,7 +14,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 44,
+      "order": 45,
       "mode": 0,
       "inputs": [
         {
@@ -50,7 +50,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 46,
+      "order": 47,
       "mode": 0,
       "inputs": [
         {
@@ -86,7 +86,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 45,
+      "order": 46,
       "mode": 0,
       "inputs": [
         {
@@ -123,7 +123,7 @@
       },
       "flags": {},
       "order": 0,
-      "mode": 0,
+      "mode": 2,
       "outputs": [
         {
           "name": "CLIP",
@@ -153,8 +153,8 @@
         "1": 54
       },
       "flags": {},
-      "order": 63,
-      "mode": 0,
+      "order": 64,
+      "mode": 2,
       "inputs": [
         {
           "name": "clip",
@@ -201,7 +201,7 @@
       },
       "flags": {},
       "order": 1,
-      "mode": 0,
+      "mode": 2,
       "outputs": [
         {
           "name": "MODEL",
@@ -230,8 +230,8 @@
         "1": 88.87997436523438
       },
       "flags": {},
-      "order": 40,
-      "mode": 0,
+      "order": 41,
+      "mode": 2,
       "inputs": [
         {
           "name": "clip",
@@ -270,7 +270,7 @@
       },
       "flags": {},
       "order": 2,
-      "mode": 0,
+      "mode": 2,
       "outputs": [
         {
           "name": "LATENT",
@@ -304,7 +304,7 @@
       },
       "flags": {},
       "order": 3,
-      "mode": 0,
+      "mode": 2,
       "outputs": [
         {
           "name": "VAE",
@@ -333,8 +333,8 @@
         "1": 246
       },
       "flags": {},
-      "order": 88,
-      "mode": 0,
+      "order": 90,
+      "mode": 2,
       "inputs": [
         {
           "name": "images",
@@ -358,8 +358,8 @@
         "1": 46
       },
       "flags": {},
-      "order": 82,
-      "mode": 0,
+      "order": 84,
+      "mode": 2,
       "inputs": [
         {
           "name": "samples",
@@ -400,7 +400,7 @@
       },
       "flags": {},
       "order": 4,
-      "mode": 0,
+      "mode": 2,
       "outputs": [
         {
           "name": "STRING",
@@ -429,7 +429,7 @@
         "1": 223.0623016357422
       },
       "flags": {},
-      "order": 47,
+      "order": 48,
       "mode": 0,
       "inputs": [
         {
@@ -535,8 +535,8 @@
         "1": 83.0513916015625
       },
       "flags": {},
-      "order": 41,
-      "mode": 0,
+      "order": 42,
+      "mode": 2,
       "inputs": [
         {
           "name": "prompt",
@@ -578,7 +578,7 @@
         "1": 83.0513916015625
       },
       "flags": {},
-      "order": 51,
+      "order": 52,
       "mode": 0,
       "inputs": [
         {
@@ -621,7 +621,7 @@
         "1": 98.19698333740234
       },
       "flags": {},
-      "order": 42,
+      "order": 43,
       "mode": 0,
       "inputs": [
         {
@@ -836,7 +836,7 @@
         "1": 94.7671890258789
       },
       "flags": {},
-      "order": 60,
+      "order": 61,
       "mode": 0,
       "inputs": [
         {
@@ -980,7 +980,7 @@
         "1": 262
       },
       "flags": {},
-      "order": 78,
+      "order": 80,
       "mode": 0,
       "inputs": [
         {
@@ -1069,7 +1069,7 @@
         "1": 223.0623016357422
       },
       "flags": {},
-      "order": 56,
+      "order": 57,
       "mode": 0,
       "inputs": [
         {
@@ -1144,7 +1144,7 @@
         "1": 83.24794006347656
       },
       "flags": {},
-      "order": 66,
+      "order": 67,
       "mode": 0,
       "inputs": [
         {
@@ -1222,7 +1222,7 @@
         "1": 83.24794006347656
       },
       "flags": {},
-      "order": 67,
+      "order": 68,
       "mode": 0,
       "inputs": [
         {
@@ -1269,7 +1269,7 @@
         "1": 166
       },
       "flags": {},
-      "order": 80,
+      "order": 82,
       "mode": 0,
       "inputs": [
         {
@@ -1364,7 +1364,7 @@
         599
       ],
       "flags": {},
-      "order": 99,
+      "order": 101,
       "mode": 0,
       "inputs": [
         {
@@ -1408,7 +1408,7 @@
           "hidden": false,
           "paused": false,
           "params": {
-            "filename": "AnimateDiff_00139.mp4",
+            "filename": "AnimateDiff_00161.mp4",
             "subfolder": "",
             "type": "output",
             "format": "video/h264-mp4"
@@ -1428,7 +1428,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 49,
+      "order": 50,
       "mode": 0,
       "inputs": [
         {
@@ -1465,7 +1465,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 97,
+      "order": 99,
       "mode": 0,
       "inputs": [
         {
@@ -1501,7 +1501,7 @@
         599
       ],
       "flags": {},
-      "order": 92,
+      "order": 94,
       "mode": 0,
       "inputs": [
         {
@@ -1568,7 +1568,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 98,
+      "order": 100,
       "mode": 0,
       "inputs": [
         {
@@ -1634,7 +1634,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 94,
+      "order": 96,
       "mode": 0,
       "inputs": [
         {
@@ -1676,7 +1676,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 100,
+      "order": 102,
       "mode": 0,
       "inputs": [
         {
@@ -1742,7 +1742,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 84,
+      "order": 86,
       "mode": 0,
       "inputs": [
         {
@@ -1783,7 +1783,7 @@
         "1": 26
       },
       "flags": {},
-      "order": 96,
+      "order": 98,
       "mode": 0,
       "inputs": [
         {
@@ -1880,8 +1880,8 @@
         "1": 262
       },
       "flags": {},
-      "order": 74,
-      "mode": 0,
+      "order": 76,
+      "mode": 2,
       "inputs": [
         {
           "name": "model",
@@ -1940,7 +1940,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 104,
+      "order": 106,
       "mode": 0,
       "inputs": [
         {
@@ -2036,7 +2036,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 85,
+      "order": 87,
       "mode": 0,
       "inputs": [
         {
@@ -2072,7 +2072,7 @@
         "1": 59.48921585083008
       },
       "flags": {},
-      "order": 52,
+      "order": 53,
       "mode": 0,
       "inputs": [
         {
@@ -2183,7 +2183,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 62,
+      "order": 60,
       "mode": 0,
       "inputs": [
         {
@@ -2279,7 +2279,7 @@
         "1": 78
       },
       "flags": {},
-      "order": 53,
+      "order": 54,
       "mode": 0,
       "inputs": [
         {
@@ -2332,7 +2332,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 79,
+      "order": 81,
       "mode": 0,
       "inputs": [
         {
@@ -2368,7 +2368,7 @@
         "1": 295.2911682128906
       },
       "flags": {},
-      "order": 68,
+      "order": 69,
       "mode": 0,
       "inputs": [
         {
@@ -2499,7 +2499,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 86,
+      "order": 88,
       "mode": 0,
       "inputs": [
         {
@@ -2541,7 +2541,7 @@
         "1": 178
       },
       "flags": {},
-      "order": 91,
+      "order": 93,
       "mode": 0,
       "inputs": [
         {
@@ -2585,7 +2585,7 @@
         "1": 54
       },
       "flags": {},
-      "order": 93,
+      "order": 95,
       "mode": 0,
       "inputs": [
         {
@@ -2621,7 +2621,7 @@
         "1": 178
       },
       "flags": {},
-      "order": 54,
+      "order": 55,
       "mode": 0,
       "inputs": [
         {
@@ -2665,7 +2665,7 @@
         "1": 94.7671890258789
       },
       "flags": {},
-      "order": 61,
+      "order": 62,
       "mode": 0,
       "inputs": [
         {
@@ -2717,7 +2717,7 @@
         94.7671890258789
       ],
       "flags": {},
-      "order": 73,
+      "order": 75,
       "mode": 0,
       "inputs": [
         {
@@ -2801,7 +2801,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 81,
+      "order": 83,
       "mode": 0,
       "inputs": [
         {
@@ -2869,7 +2869,7 @@
         599
       ],
       "flags": {},
-      "order": 90,
+      "order": 92,
       "mode": 0,
       "inputs": [
         {
@@ -2916,7 +2916,7 @@
           "hidden": false,
           "paused": false,
           "params": {
-            "filename": "AnimateDiff_00140.mp4",
+            "filename": "AnimateDiff_00162.mp4",
             "subfolder": "",
             "type": "output",
             "format": "video/h264-mp4"
@@ -2936,7 +2936,7 @@
         214
       ],
       "flags": {},
-      "order": 76,
+      "order": 78,
       "mode": 0,
       "inputs": [
         {
@@ -3024,7 +3024,7 @@
         190.4601885986326
       ],
       "flags": {},
-      "order": 103,
+      "order": 105,
       "mode": 0,
       "inputs": [
         {
@@ -3082,7 +3082,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 72,
+      "order": 74,
       "mode": 0,
       "inputs": [
         {
@@ -3115,10 +3115,10 @@
       ],
       "size": [
         315,
-        58
+        75.99997615814209
       ],
       "flags": {},
-      "order": 105,
+      "order": 107,
       "mode": 0,
       "inputs": [
         {
@@ -3143,7 +3143,7 @@
       },
       "widgets_values": [
         "",
-        "/home/admin/ComfyUI/output/AnimateDiff_00140.mp4"
+        "/home/admin/ComfyUI/output/AnimateDiff_00162.mp4"
       ]
     },
     {
@@ -3158,7 +3158,7 @@
         "1": 66
       },
       "flags": {},
-      "order": 65,
+      "order": 66,
       "mode": 0,
       "inputs": [
         {
@@ -3205,7 +3205,7 @@
         "1": 102
       },
       "flags": {},
-      "order": 50,
+      "order": 51,
       "mode": 0,
       "inputs": [
         {
@@ -3257,7 +3257,7 @@
         76.0000867843628
       ],
       "flags": {},
-      "order": 77,
+      "order": 79,
       "mode": 0,
       "inputs": [
         {
@@ -3282,7 +3282,7 @@
       },
       "widgets_values": [
         "",
-        "/home/admin/ComfyUI/output/AnimateDiff_00141.mp4"
+        "/home/admin/ComfyUI/output/AnimateDiff_00162.mp4"
       ]
     },
     {
@@ -3297,7 +3297,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 75,
+      "order": 77,
       "mode": 0,
       "inputs": [
         {
@@ -3338,7 +3338,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 43,
+      "order": 44,
       "mode": 0,
       "inputs": [
         {
@@ -3379,7 +3379,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 64,
+      "order": 65,
       "mode": 0,
       "inputs": [
         {
@@ -3428,7 +3428,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 89,
+      "order": 91,
       "mode": 0,
       "inputs": [
         {
@@ -3474,7 +3474,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 83,
+      "order": 85,
       "mode": 0,
       "inputs": [
         {
@@ -3520,9 +3520,7 @@
         {
           "name": "LATENT",
           "type": "LATENT",
-          "links": [
-            78
-          ],
+          "links": [],
           "shape": 3,
           "slot_index": 0
         }
@@ -3548,7 +3546,7 @@
         "1": 82
       },
       "flags": {},
-      "order": 102,
+      "order": 104,
       "mode": 0,
       "inputs": [
         {
@@ -3588,7 +3586,7 @@
         "1": 242
       },
       "flags": {},
-      "order": 95,
+      "order": 97,
       "mode": 0,
       "inputs": [
         {
@@ -3652,7 +3650,7 @@
         599
       ],
       "flags": {},
-      "order": 101,
+      "order": 103,
       "mode": 0,
       "inputs": [
         {
@@ -3696,73 +3694,13 @@
           "hidden": false,
           "paused": false,
           "params": {
-            "filename": "AnimateDiff_00138.mp4",
+            "filename": "AnimateDiff_00160.mp4",
             "subfolder": "",
             "type": "output",
             "format": "video/h264-mp4"
           }
         }
       }
-    },
-    {
-      "id": 70,
-      "type": "KSampler",
-      "pos": [
-        -84.62820804931744,
-        1544.4630367565915
-      ],
-      "size": {
-        "0": 315,
-        "1": 262
-      },
-      "flags": {},
-      "order": 87,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "MODEL",
-          "link": 72
-        },
-        {
-          "name": "positive",
-          "type": "CONDITIONING",
-          "link": 84
-        },
-        {
-          "name": "negative",
-          "type": "CONDITIONING",
-          "link": 83
-        },
-        {
-          "name": "latent_image",
-          "type": "LATENT",
-          "link": 78
-        }
-      ],
-      "outputs": [
-        {
-          "name": "LATENT",
-          "type": "LATENT",
-          "links": [
-            70,
-            89
-          ],
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "KSampler"
-      },
-      "widgets_values": [
-        1234,
-        "fixed",
-        4,
-        1,
-        "lcm",
-        "sgm_uniform",
-        1
-      ]
     },
     {
       "id": 69,
@@ -3858,7 +3796,7 @@
         "1": 98.19698333740234
       },
       "flags": {},
-      "order": 48,
+      "order": 49,
       "mode": 0,
       "inputs": [
         {
@@ -3883,90 +3821,6 @@
       },
       "widgets_values": [
         "worst quality, low quality, normal quality, bad quality, blurry, out of focus, fused fingers, disfigured, epiCPhoto-neg, BadDream, nsfw"
-      ]
-    },
-    {
-      "id": 116,
-      "type": "Image Resize",
-      "pos": [
-        -621,
-        2460
-      ],
-      "size": {
-        "0": 315,
-        "1": 178
-      },
-      "flags": {},
-      "order": 55,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 121
-        }
-      ],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            136
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Image Resize"
-      },
-      "widgets_values": [
-        "resize",
-        "true",
-        "lanczos",
-        0.5,
-        512,
-        512
-      ]
-    },
-    {
-      "id": 125,
-      "type": "FakeScribblePreprocessor",
-      "pos": [
-        -147.26862879179248,
-        2355.6418701905577
-      ],
-      "size": {
-        "0": 315,
-        "1": 82
-      },
-      "flags": {},
-      "order": 69,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 136
-        }
-      ],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            137
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "FakeScribblePreprocessor"
-      },
-      "widgets_values": [
-        "enable",
-        512
       ]
     },
     {
@@ -4002,81 +3856,6 @@
       ]
     },
     {
-      "id": 29,
-      "type": "SetNode",
-      "pos": [
-        -555,
-        181
-      ],
-      "size": {
-        "0": 210,
-        "1": 58
-      },
-      "flags": {},
-      "order": 57,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "link": 138
-        }
-      ],
-      "outputs": [
-        {
-          "name": "*",
-          "type": "*",
-          "links": null
-        }
-      ],
-      "title": "Set_IpImage",
-      "properties": {
-        "previousName": "IpImage"
-      },
-      "widgets_values": [
-        "IpImage"
-      ]
-    },
-    {
-      "id": 126,
-      "type": "LoadImage",
-      "pos": [
-        -220,
-        163
-      ],
-      "size": [
-        315,
-        313.99999237060547
-      ],
-      "flags": {},
-      "order": 35,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            138
-          ],
-          "shape": 3,
-          "slot_index": 0
-        },
-        {
-          "name": "MASK",
-          "type": "MASK",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LoadImage"
-      },
-      "widgets_values": [
-        "i2v.png",
-        "image"
-      ]
-    },
-    {
       "id": 40,
       "type": "GetNode",
       "pos": [
@@ -4088,7 +3867,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 36,
+      "order": 35,
       "mode": 0,
       "outputs": [
         {
@@ -4170,7 +3949,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 37,
+      "order": 36,
       "mode": 0,
       "outputs": [
         {
@@ -4201,7 +3980,7 @@
         76.00004482269287
       ],
       "flags": {},
-      "order": 70,
+      "order": 72,
       "mode": 0,
       "inputs": [
         {
@@ -4241,7 +4020,7 @@
         76.00004482269287
       ],
       "flags": {},
-      "order": 71,
+      "order": 73,
       "mode": 0,
       "inputs": [
         {
@@ -4266,7 +4045,7 @@
       },
       "widgets_values": [
         "",
-        "16"
+        "32"
       ]
     },
     {
@@ -4310,42 +4089,6 @@
       ]
     },
     {
-      "id": 59,
-      "type": "StringConstant",
-      "pos": [
-        -1504,
-        -1450
-      ],
-      "size": [
-        319.20001220703125,
-        58
-      ],
-      "flags": {},
-      "order": 38,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": [
-            61,
-            63
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "title": "change the value to generate new video",
-      "properties": {
-        "Node name for S&R": "StringConstant"
-      },
-      "widgets_values": [
-        "8"
-      ],
-      "color": "#432",
-      "bgcolor": "#653"
-    },
-    {
       "id": 17,
       "type": "StringConstantMultiline",
       "pos": [
@@ -4357,7 +4100,7 @@
         "1": 200
       },
       "flags": {},
-      "order": 39,
+      "order": 37,
       "mode": 0,
       "outputs": [
         {
@@ -4379,6 +4122,333 @@
       ],
       "color": "#432",
       "bgcolor": "#653"
+    },
+    {
+      "id": 125,
+      "type": "FakeScribblePreprocessor",
+      "pos": [
+        -178,
+        2196
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 70,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 136
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            137
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FakeScribblePreprocessor"
+      },
+      "widgets_values": [
+        "enable",
+        512
+      ]
+    },
+    {
+      "id": 116,
+      "type": "Image Resize",
+      "pos": [
+        -621,
+        2460
+      ],
+      "size": {
+        "0": 315,
+        "1": 178
+      },
+      "flags": {},
+      "order": 56,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 121
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            136,
+            142
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Image Resize"
+      },
+      "widgets_values": [
+        "resize",
+        "true",
+        "lanczos",
+        0.5,
+        512,
+        512
+      ]
+    },
+    {
+      "id": 132,
+      "type": "GetNode",
+      "pos": [
+        -72,
+        2473
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 38,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            143
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "Get_VAE",
+      "properties": {},
+      "widgets_values": [
+        "VAE"
+      ]
+    },
+    {
+      "id": 131,
+      "type": "VAEEncode",
+      "pos": [
+        -72.4570452362683,
+        2382.713586911861
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 71,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 142
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 143
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            144
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      }
+    },
+    {
+      "id": 70,
+      "type": "KSampler",
+      "pos": [
+        -84.62820804931744,
+        1544.4630367565915
+      ],
+      "size": {
+        "0": 315,
+        "1": 262
+      },
+      "flags": {},
+      "order": 89,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 72
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 84
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 83
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 144
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            70,
+            89
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        1234,
+        "fixed",
+        4,
+        1,
+        "lcm",
+        "sgm_uniform",
+        0.3
+      ]
+    },
+    {
+      "id": 59,
+      "type": "StringConstant",
+      "pos": [
+        -1504,
+        -1450
+      ],
+      "size": [
+        319.20001220703125,
+        58
+      ],
+      "flags": {},
+      "order": 39,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            61,
+            63
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "title": "change the value to generate new video",
+      "properties": {
+        "Node name for S&R": "StringConstant"
+      },
+      "widgets_values": [
+        "10"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 126,
+      "type": "LoadImage",
+      "pos": [
+        -269,
+        165
+      ],
+      "size": [
+        315,
+        313.99999237060547
+      ],
+      "flags": {},
+      "order": 40,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            138
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "i2v.png",
+        "image"
+      ]
+    },
+    {
+      "id": 29,
+      "type": "SetNode",
+      "pos": [
+        109,
+        231
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 63,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "link": 138
+        }
+      ],
+      "outputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "title": "Set_IpImage",
+      "properties": {
+        "previousName": "IpImage"
+      },
+      "widgets_values": [
+        "IpImage"
+      ]
     }
   ],
   "links": [
@@ -4791,14 +4861,6 @@
       "CLIP"
     ],
     [
-      78,
-      78,
-      0,
-      70,
-      3,
-      "LATENT"
-    ],
-    [
       79,
       74,
       0,
@@ -5205,6 +5267,30 @@
       130,
       0,
       "STRING"
+    ],
+    [
+      142,
+      116,
+      0,
+      131,
+      0,
+      "IMAGE"
+    ],
+    [
+      143,
+      132,
+      0,
+      131,
+      1,
+      "VAE"
+    ],
+    [
+      144,
+      131,
+      0,
+      70,
+      3,
+      "LATENT"
     ]
   ],
   "groups": [
