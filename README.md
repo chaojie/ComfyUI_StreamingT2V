@@ -16,9 +16,14 @@ VidXTend (<10G VRAM) | Original (<15G VRAM)
 
 <img src="workflow/wf_VidXTend.png" raw=true>
 
-[Test prompt travel Workflow](https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/workflow/wf_prompttravel.json)
+[Test prompt travel cyclist Workflow](https://github.com/chaojie/ComfyUI_StreamingT2V/blob/main/workflow/wf_prompttravel.json)
 
 <img src="workflow/wf_prompttravel.png" raw=true>
+
+Open the Auto Queue option, Stop it when you want to.
+
+<img src="workflow/cyclist.png" raw=true>
+
 
 <details> <summary>More Workflow</summary>
 
