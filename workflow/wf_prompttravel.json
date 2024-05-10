@@ -1,6 +1,6 @@
 {
-  "last_node_id": 132,
-  "last_link_id": 144,
+  "last_node_id": 134,
+  "last_link_id": 150,
   "nodes": [
     {
       "id": 14,
@@ -578,7 +578,7 @@
         "1": 83.0513916015625
       },
       "flags": {},
-      "order": 52,
+      "order": 51,
       "mode": 0,
       "inputs": [
         {
@@ -836,7 +836,7 @@
         "1": 94.7671890258789
       },
       "flags": {},
-      "order": 61,
+      "order": 60,
       "mode": 0,
       "inputs": [
         {
@@ -980,7 +980,7 @@
         "1": 262
       },
       "flags": {},
-      "order": 80,
+      "order": 78,
       "mode": 0,
       "inputs": [
         {
@@ -1069,7 +1069,7 @@
         "1": 223.0623016357422
       },
       "flags": {},
-      "order": 57,
+      "order": 56,
       "mode": 0,
       "inputs": [
         {
@@ -1144,7 +1144,7 @@
         "1": 83.24794006347656
       },
       "flags": {},
-      "order": 67,
+      "order": 66,
       "mode": 0,
       "inputs": [
         {
@@ -1222,7 +1222,7 @@
         "1": 83.24794006347656
       },
       "flags": {},
-      "order": 68,
+      "order": 67,
       "mode": 0,
       "inputs": [
         {
@@ -1269,7 +1269,7 @@
         "1": 166
       },
       "flags": {},
-      "order": 82,
+      "order": 80,
       "mode": 0,
       "inputs": [
         {
@@ -1361,10 +1361,10 @@
       ],
       "size": [
         315,
-        599
+        290
       ],
       "flags": {},
-      "order": 101,
+      "order": 100,
       "mode": 0,
       "inputs": [
         {
@@ -1378,7 +1378,7 @@
           "link": null
         },
         {
-          "name": "batch_manager",
+          "name": "meta_batch",
           "type": "VHS_BatchManager",
           "link": null
         }
@@ -1465,7 +1465,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 99,
+      "order": 98,
       "mode": 0,
       "inputs": [
         {
@@ -1498,10 +1498,10 @@
       ],
       "size": [
         315,
-        599
+        290
       ],
       "flags": {},
-      "order": 94,
+      "order": 93,
       "mode": 0,
       "inputs": [
         {
@@ -1515,7 +1515,7 @@
           "link": null
         },
         {
-          "name": "batch_manager",
+          "name": "meta_batch",
           "type": "VHS_BatchManager",
           "link": null
         }
@@ -1568,7 +1568,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 100,
+      "order": 99,
       "mode": 0,
       "inputs": [
         {
@@ -1634,7 +1634,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 96,
+      "order": 95,
       "mode": 0,
       "inputs": [
         {
@@ -1676,7 +1676,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 102,
+      "order": 101,
       "mode": 0,
       "inputs": [
         {
@@ -1742,7 +1742,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 86,
+      "order": 88,
       "mode": 0,
       "inputs": [
         {
@@ -1770,103 +1770,6 @@
       "properties": {
         "Node name for S&R": "ImageBatch"
       }
-    },
-    {
-      "id": 99,
-      "type": "VHS_FILENAMES_STRING_StreamingT2V",
-      "pos": [
-        -86.46341076721387,
-        2902.7440227194206
-      ],
-      "size": {
-        "0": 277.20001220703125,
-        "1": 26
-      },
-      "flags": {},
-      "order": 98,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "filenames",
-          "type": "VHS_FILENAMES",
-          "link": 104
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": [
-            105
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "VHS_FILENAMES_STRING_StreamingT2V"
-      },
-      "widgets_values": {}
-    },
-    {
-      "id": 103,
-      "type": "GetNode",
-      "pos": [
-        -12.237775795094535,
-        3009.0824276693743
-      ],
-      "size": {
-        "0": 210,
-        "1": 58
-      },
-      "flags": {},
-      "order": 19,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": [
-            108
-          ],
-          "slot_index": 0
-        }
-      ],
-      "title": "Get_video_file",
-      "properties": {},
-      "widgets_values": [
-        "video_file"
-      ]
-    },
-    {
-      "id": 104,
-      "type": "GetNode",
-      "pos": [
-        -2261,
-        2843
-      ],
-      "size": {
-        "0": 210,
-        "1": 58
-      },
-      "flags": {},
-      "order": 20,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": [
-            109
-          ],
-          "slot_index": 0
-        }
-      ],
-      "title": "Get_video_file",
-      "properties": {},
-      "widgets_values": [
-        "video_file"
-      ]
     },
     {
       "id": 26,
@@ -1976,7 +1879,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 21,
+      "order": 19,
       "mode": 0,
       "outputs": [
         {
@@ -2006,7 +1909,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 22,
+      "order": 20,
       "mode": 0,
       "outputs": [
         {
@@ -2036,7 +1939,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 87,
+      "order": 89,
       "mode": 0,
       "inputs": [
         {
@@ -2072,7 +1975,7 @@
         "1": 59.48921585083008
       },
       "flags": {},
-      "order": 53,
+      "order": 52,
       "mode": 0,
       "inputs": [
         {
@@ -2123,7 +2026,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 23,
+      "order": 21,
       "mode": 0,
       "outputs": [
         {
@@ -2153,7 +2056,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 24,
+      "order": 22,
       "mode": 0,
       "outputs": [
         {
@@ -2183,7 +2086,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 60,
+      "order": 59,
       "mode": 0,
       "inputs": [
         {
@@ -2219,7 +2122,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 25,
+      "order": 23,
       "mode": 0,
       "outputs": [
         {
@@ -2249,7 +2152,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 26,
+      "order": 24,
       "mode": 0,
       "outputs": [
         {
@@ -2279,7 +2182,7 @@
         "1": 78
       },
       "flags": {},
-      "order": 54,
+      "order": 53,
       "mode": 0,
       "inputs": [
         {
@@ -2332,7 +2235,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 81,
+      "order": 79,
       "mode": 0,
       "inputs": [
         {
@@ -2368,7 +2271,7 @@
         "1": 295.2911682128906
       },
       "flags": {},
-      "order": 69,
+      "order": 68,
       "mode": 0,
       "inputs": [
         {
@@ -2439,7 +2342,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 27,
+      "order": 25,
       "mode": 0,
       "outputs": [
         {
@@ -2469,7 +2372,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 28,
+      "order": 26,
       "mode": 0,
       "outputs": [
         {
@@ -2499,7 +2402,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 88,
+      "order": 86,
       "mode": 0,
       "inputs": [
         {
@@ -2541,7 +2444,7 @@
         "1": 178
       },
       "flags": {},
-      "order": 93,
+      "order": 92,
       "mode": 0,
       "inputs": [
         {
@@ -2585,7 +2488,7 @@
         "1": 54
       },
       "flags": {},
-      "order": 95,
+      "order": 94,
       "mode": 0,
       "inputs": [
         {
@@ -2621,7 +2524,7 @@
         "1": 178
       },
       "flags": {},
-      "order": 55,
+      "order": 54,
       "mode": 0,
       "inputs": [
         {
@@ -2665,7 +2568,7 @@
         "1": 94.7671890258789
       },
       "flags": {},
-      "order": 62,
+      "order": 61,
       "mode": 0,
       "inputs": [
         {
@@ -2712,12 +2615,12 @@
         -833.0960649609372,
         -1317.5732866891478
       ],
-      "size": [
-        210,
-        94.7671890258789
-      ],
+      "size": {
+        "0": 210,
+        "1": 94.7671890258789
+      },
       "flags": {},
-      "order": 75,
+      "order": 74,
       "mode": 0,
       "inputs": [
         {
@@ -2769,7 +2672,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 29,
+      "order": 27,
       "mode": 0,
       "outputs": [
         {
@@ -2801,7 +2704,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 83,
+      "order": 81,
       "mode": 0,
       "inputs": [
         {
@@ -2837,7 +2740,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 30,
+      "order": 28,
       "mode": 0,
       "outputs": [
         {
@@ -2866,10 +2769,10 @@
       ],
       "size": [
         315,
-        599
+        290
       ],
       "flags": {},
-      "order": 92,
+      "order": 96,
       "mode": 0,
       "inputs": [
         {
@@ -2883,7 +2786,7 @@
           "link": null
         },
         {
-          "name": "batch_manager",
+          "name": "meta_batch",
           "type": "VHS_BatchManager",
           "link": null
         }
@@ -2936,11 +2839,11 @@
         214
       ],
       "flags": {},
-      "order": 78,
+      "order": 82,
       "mode": 0,
       "inputs": [
         {
-          "name": "batch_manager",
+          "name": "meta_batch",
           "type": "VHS_BatchManager",
           "link": null
         },
@@ -3013,64 +2916,6 @@
       }
     },
     {
-      "id": 100,
-      "type": "SaveText",
-      "pos": [
-        268,
-        2929
-      ],
-      "size": [
-        221.84842285156185,
-        190.4601885986326
-      ],
-      "flags": {},
-      "order": 105,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 105,
-          "widget": {
-            "name": "text"
-          }
-        },
-        {
-          "name": "file",
-          "type": "STRING",
-          "link": 108,
-          "widget": {
-            "name": "file"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": [
-            129
-          ],
-          "shape": 3,
-          "slot_index": 0
-        },
-        {
-          "name": "BOOLEAN",
-          "type": "BOOLEAN",
-          "links": null,
-          "shape": 3
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "SaveText"
-      },
-      "widgets_values": [
-        "output",
-        "dragtest_1.txt",
-        ""
-      ]
-    },
-    {
       "id": 62,
       "type": "SetNode",
       "pos": [
@@ -3082,7 +2927,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 74,
+      "order": 73,
       "mode": 0,
       "inputs": [
         {
@@ -3113,10 +2958,10 @@
         574.0640545654289,
         2962.644310760498
       ],
-      "size": [
-        315,
-        75.99997615814209
-      ],
+      "size": {
+        "0": 315,
+        "1": 75.9999771118164
+      },
       "flags": {},
       "order": 107,
       "mode": 0,
@@ -3124,7 +2969,7 @@
         {
           "name": "text",
           "type": "STRING",
-          "link": 129,
+          "link": 150,
           "widget": {
             "name": "text"
           }
@@ -3158,18 +3003,18 @@
         "1": 66
       },
       "flags": {},
-      "order": 66,
+      "order": 75,
       "mode": 0,
       "inputs": [
         {
           "name": "ANY",
           "type": "*",
-          "link": 132
+          "link": 147
         },
         {
           "name": "IF_TRUE",
           "type": "*",
-          "link": 131
+          "link": 146
         },
         {
           "name": "IF_FALSE",
@@ -3194,70 +3039,18 @@
       }
     },
     {
-      "id": 85,
-      "type": "LoadText",
-      "pos": [
-        -1971,
-        2836
-      ],
-      "size": {
-        "0": 315,
-        "1": 102
-      },
-      "flags": {},
-      "order": 51,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "file",
-          "type": "STRING",
-          "link": 109,
-          "widget": {
-            "name": "file"
-          }
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": [
-            131
-          ],
-          "shape": 3,
-          "slot_index": 0
-        },
-        {
-          "name": "BOOLEAN",
-          "type": "BOOLEAN",
-          "links": [
-            132
-          ],
-          "shape": 3,
-          "slot_index": 1
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LoadText"
-      },
-      "widgets_values": [
-        "output",
-        "dragtest_1.txt"
-      ]
-    },
-    {
       "id": 122,
       "type": "ShowText|pysssss",
       "pos": [
         -1619,
         3124
       ],
-      "size": [
-        315,
-        76.0000867843628
-      ],
+      "size": {
+        "0": 315,
+        "1": 76.00008392333984
+      },
       "flags": {},
-      "order": 79,
+      "order": 83,
       "mode": 0,
       "inputs": [
         {
@@ -3514,7 +3307,7 @@
         "1": 106
       },
       "flags": {},
-      "order": 31,
+      "order": 29,
       "mode": 0,
       "outputs": [
         {
@@ -3647,7 +3440,7 @@
       ],
       "size": [
         315,
-        599
+        290
       ],
       "flags": {},
       "order": 103,
@@ -3664,7 +3457,7 @@
           "link": null
         },
         {
-          "name": "batch_manager",
+          "name": "meta_batch",
           "type": "VHS_BatchManager",
           "link": null
         }
@@ -3714,7 +3507,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 32,
+      "order": 30,
       "mode": 0,
       "outputs": [
         {
@@ -3739,14 +3532,14 @@
         -1009,
         1700
       ],
-      "size": [
-        327.6000061035156,
-        226.87738230124023
-      ],
+      "size": {
+        "0": 327.6000061035156,
+        "1": 226.87738037109375
+      },
       "flags": {
         "collapsed": true
       },
-      "order": 33,
+      "order": 31,
       "mode": 0,
       "inputs": [
         {
@@ -3835,7 +3628,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 34,
+      "order": 32,
       "mode": 0,
       "outputs": [
         {
@@ -3867,7 +3660,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 35,
+      "order": 33,
       "mode": 0,
       "outputs": [
         {
@@ -3897,7 +3690,7 @@
         "1": 59.48921585083008
       },
       "flags": {},
-      "order": 58,
+      "order": 57,
       "mode": 0,
       "inputs": [
         {
@@ -3949,7 +3742,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 36,
+      "order": 34,
       "mode": 0,
       "outputs": [
         {
@@ -3975,12 +3768,12 @@
         -2076,
         2048
       ],
-      "size": [
-        315,
-        76.00004482269287
-      ],
+      "size": {
+        "0": 315,
+        "1": 76.00004577636719
+      },
       "flags": {},
-      "order": 72,
+      "order": 71,
       "mode": 0,
       "inputs": [
         {
@@ -4015,12 +3808,12 @@
         -2071,
         2193
       ],
-      "size": [
-        315,
-        76.00004482269287
-      ],
+      "size": {
+        "0": 315,
+        "1": 76.00004577636719
+      },
       "flags": {},
-      "order": 73,
+      "order": 72,
       "mode": 0,
       "inputs": [
         {
@@ -4060,7 +3853,7 @@
         "1": 82
       },
       "flags": {},
-      "order": 59,
+      "order": 58,
       "mode": 0,
       "inputs": [
         {
@@ -4100,7 +3893,7 @@
         "1": 200
       },
       "flags": {},
-      "order": 37,
+      "order": 35,
       "mode": 0,
       "outputs": [
         {
@@ -4131,11 +3924,11 @@
         2196
       ],
       "size": {
-        "0": 315,
+        "0": 319.20001220703125,
         "1": 82
       },
       "flags": {},
-      "order": 70,
+      "order": 69,
       "mode": 0,
       "inputs": [
         {
@@ -4175,7 +3968,7 @@
         "1": 178
       },
       "flags": {},
-      "order": 56,
+      "order": 55,
       "mode": 0,
       "inputs": [
         {
@@ -4220,7 +4013,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 38,
+      "order": 36,
       "mode": 0,
       "outputs": [
         {
@@ -4250,7 +4043,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 71,
+      "order": 70,
       "mode": 0,
       "inputs": [
         {
@@ -4291,7 +4084,7 @@
         "1": 262
       },
       "flags": {},
-      "order": 89,
+      "order": 87,
       "mode": 0,
       "inputs": [
         {
@@ -4346,12 +4139,12 @@
         -1504,
         -1450
       ],
-      "size": [
-        319.20001220703125,
-        58
-      ],
+      "size": {
+        "0": 319.20001220703125,
+        "1": 58
+      },
       "flags": {},
-      "order": 39,
+      "order": 37,
       "mode": 0,
       "outputs": [
         {
@@ -4382,12 +4175,12 @@
         -269,
         165
       ],
-      "size": [
-        315,
-        313.99999237060547
-      ],
+      "size": {
+        "0": 315,
+        "1": 314
+      },
       "flags": {},
-      "order": 40,
+      "order": 38,
       "mode": 0,
       "outputs": [
         {
@@ -4426,7 +4219,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 63,
+      "order": 62,
       "mode": 0,
       "inputs": [
         {
@@ -4448,6 +4241,213 @@
       },
       "widgets_values": [
         "IpImage"
+      ]
+    },
+    {
+      "id": 104,
+      "type": "GetNode",
+      "pos": [
+        -2261,
+        2843
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 39,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            145
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "Get_video_file",
+      "properties": {},
+      "widgets_values": [
+        "video_file"
+      ]
+    },
+    {
+      "id": 133,
+      "type": "LoadText_StreamingT2V",
+      "pos": [
+        -1988,
+        2848
+      ],
+      "size": [
+        315,
+        102
+      ],
+      "flags": {},
+      "order": 63,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "file",
+          "type": "STRING",
+          "link": 145,
+          "widget": {
+            "name": "file"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            146
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "BOOLEAN",
+          "type": "BOOLEAN",
+          "links": [
+            147
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadText_StreamingT2V"
+      },
+      "widgets_values": [
+        "output",
+        "dragtest_1.txt"
+      ]
+    },
+    {
+      "id": 103,
+      "type": "GetNode",
+      "pos": [
+        -12.237775795094535,
+        3009.0824276693743
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 40,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            148
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "Get_video_file",
+      "properties": {},
+      "widgets_values": [
+        "video_file"
+      ]
+    },
+    {
+      "id": 99,
+      "type": "VHS_FILENAMES_STRING_StreamingT2V",
+      "pos": [
+        -86.46341076721387,
+        2902.7440227194206
+      ],
+      "size": {
+        "0": 277.20001220703125,
+        "1": 26
+      },
+      "flags": {},
+      "order": 102,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "filenames",
+          "type": "VHS_FILENAMES",
+          "link": 104
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            149
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VHS_FILENAMES_STRING_StreamingT2V"
+      },
+      "widgets_values": {}
+    },
+    {
+      "id": 134,
+      "type": "SaveText_StreamingT2V",
+      "pos": [
+        222,
+        3088
+      ],
+      "size": [
+        313,
+        90
+      ],
+      "flags": {},
+      "order": 105,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 149,
+          "widget": {
+            "name": "text"
+          }
+        },
+        {
+          "name": "file",
+          "type": "STRING",
+          "link": 148,
+          "widget": {
+            "name": "file"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            150
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "BOOLEAN",
+          "type": "BOOLEAN",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveText_StreamingT2V"
+      },
+      "widgets_values": [
+        "output",
+        "dragtest_1.txt",
+        ""
       ]
     }
   ],
@@ -5005,30 +5005,6 @@
       "VHS_FILENAMES"
     ],
     [
-      105,
-      99,
-      0,
-      100,
-      0,
-      "STRING"
-    ],
-    [
-      108,
-      103,
-      0,
-      100,
-      1,
-      "STRING"
-    ],
-    [
-      109,
-      104,
-      0,
-      85,
-      0,
-      "STRING"
-    ],
-    [
       110,
       106,
       0,
@@ -5165,36 +5141,12 @@
       "STRING"
     ],
     [
-      129,
-      100,
-      0,
-      121,
-      0,
-      "STRING"
-    ],
-    [
       130,
       86,
       0,
       122,
       0,
       "STRING"
-    ],
-    [
-      131,
-      85,
-      0,
-      86,
-      1,
-      "*"
-    ],
-    [
-      132,
-      85,
-      1,
-      86,
-      0,
-      "*"
     ],
     [
       133,
@@ -5291,6 +5243,54 @@
       70,
       3,
       "LATENT"
+    ],
+    [
+      145,
+      104,
+      0,
+      133,
+      0,
+      "STRING"
+    ],
+    [
+      146,
+      133,
+      0,
+      86,
+      1,
+      "*"
+    ],
+    [
+      147,
+      133,
+      1,
+      86,
+      0,
+      "*"
+    ],
+    [
+      148,
+      103,
+      0,
+      134,
+      1,
+      "STRING"
+    ],
+    [
+      149,
+      99,
+      0,
+      134,
+      0,
+      "STRING"
+    ],
+    [
+      150,
+      134,
+      0,
+      121,
+      0,
+      "STRING"
     ]
   ],
   "groups": [

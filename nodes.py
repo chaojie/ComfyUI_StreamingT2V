@@ -885,6 +885,7 @@ class PromptTravelIndex:
         return (ret,)
 
 def get_allowed_dirs():
+    import json
     dir = os.path.abspath(os.path.join(__file__, ".."))
     file = os.path.join(dir, "text_file_dirs.json")
     with open(file, "r") as f:
